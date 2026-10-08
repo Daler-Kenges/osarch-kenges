@@ -1,4 +1,5 @@
-PS C:\Users\Asus> Get-Volume | Select-Object DriveLetter, @{N="FreeGB";E={[math]::Round($_.SizeRemaining/1GB,2)}}
+Command:
+Get-Volume | Select-Object DriveLetter, @{N="FreeGB";E={[math]::Round($_.SizeRemaining/1GB,2)}}
 
 DriveLetter FreeGB
 ----------- ------
@@ -7,22 +8,22 @@ DriveLetter FreeGB
 
 
 
-
-PS C:\Users\Asus> Get-Disk | Select-Object Number, FriendlyName
+Command:
+Get-Disk | Select-Object Number, FriendlyName
 
 Number FriendlyName
 ------ ------------
      0 KBG60ZNV512G KIOXIA
 
-
-PS C:\Users\Asus> Get-PhysicalDisk | Select-Object DeviceId, MediaType
+Command:
+Get-PhysicalDisk | Select-Object DeviceId, MediaType
 
 DeviceId MediaType
 -------- ---------
 0        SSD
 
-
-PS C:\Users\Asus> Get-Disk | Select-Object FriendlyName, BusType
+Command:
+Get-Disk | Select-Object FriendlyName, BusType
 
 FriendlyName        BusType
 ------------        -------
@@ -36,7 +37,7 @@ KBG60ZNV512G KIOXIA NVMe
 
 
 
-
+Command:
 Get-CimInstance Win32_Bios | Select-Object @{N="FirmwareType";E={$env:firmware_type}}, SMBIOSBIOSVersion, ReleaseDate
 
 FirmwareType SMBIOSBIOSVersion ReleaseDate
