@@ -1,7 +1,11 @@
+Command:
 Get-CimInstance Win32_PhysicalMemory | Format-Table DeviceLocator, Speed, @{Name="Capacity (GB)"; Expression={$_.Capacity / 1GB}}
-
+Response:
 DeviceLocator Speed Capacity (GB)
 ------------- ----- -------------
 DIMM 0         5600            16
-the given command had brought the memory slot with it's name, it's speed and capacity in gigabytes
+Explanation: Here, CimInstance retrieves information about physical memory (RAM) from Win32_PhysicalMemory, that stores data about memory.
+Response displays data regarding device locator (memory module address that is labeled as DIMM 0, that is the same thing as Slot 1),
+module speed of 5600 MT/s (Mega Transfers per second), and memory capacity (how much data can be stored in real time during running) of 16 gigabytes (GB) 
+
 
