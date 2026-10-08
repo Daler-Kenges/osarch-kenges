@@ -1,1 +1,7 @@
+Get-CimInstance Win32_PhysicalMemory | Format-Table DeviceLocator, Speed, @{Name="Capacity (GB)"; Expression={$_.Capacity / 1GB}}
+
+DeviceLocator Speed Capacity (GB)
+------------- ----- -------------
+DIMM 0         5600            16
+the given command had brought the memory slot with it's name, it's speed and capacity in gigabytes
 
