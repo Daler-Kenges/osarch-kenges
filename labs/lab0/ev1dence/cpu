@@ -1,1 +1,13 @@
+PS C:\Windows\System32> (Get-CimInstance Win32_Processor).Name
+AMD Ryzen 7 170 with Radeon Graphics - "gets the name of CPU/processor"
+
+
+
+
+PS C:\Windows\System32> Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors, NumberOfThreads
+
+Name                                            NumberOfCores NumberOfLogicalProcessors NumberOfThreads
+----                                            ------------- ------------------------- ---------------
+AMD Ryzen 7 170 with Radeon Graphics                        8                        16
+this command gives the information about the name of CPU, the amount of it's cores and logical processor, which are also called threads.
 
