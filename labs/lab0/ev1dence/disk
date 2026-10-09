@@ -1,33 +1,63 @@
 Command:
 Get-Volume | Select-Object DriveLetter, @{N="FreeGB";E={[math]::Round($_.SizeRemaining/1GB,2)}}
 
+Response:
 DriveLetter FreeGB
 ----------- ------
           C 234.03
               0.11
+
+Explanation: The prompt obtains data about disk letter (C, ..., used for order), remaining memory space from OS and it gets displayed in columns. Get-Volume reaches the OS (Windows in this case), interrogates about the information, regarding drives' letters (C in this case with the first),
+and remaining volume of memory (measured in GB that stands for gigabytes and showing 234.03, which was rounded on purpose not to overload the column),
+which it retrieves and displays in columns. Select-Object filters the data to relate only to drives, which then labels remaining amount of memory space
+as 'FreeGB' and sets calculations, that involve division. 1GB is written to turn huge string (amount of bytes) into understandable gigabytes. Second 
+drive has no letter labeled as disk letter (because it's service partition that is not displayed in explorer) and remaining space of 0.11 GB. 
+
 
 
 
 Command:
 Get-Disk | Select-Object Number, FriendlyName
 
+Response:
 Number FriendlyName
 ------ ------------
      0 KBG60ZNV512G KIOXIA
 
+Explanation: The prompt obtains data about disk model number and it's name. Get-Disk returns disk's model number (this is what column 'Number'
+is about) that is 0 (numerical order), as well as model name (the column with 'Friendly Name' label that means the name assigned to model) - which consists of 
+model code (KBG60ZNV512G) and producer name (KIOXIA), that results in a full identifier - KBG60ZNV512G KIOXIA.
+
+
+
 Command:
 Get-PhysicalDisk | Select-Object DeviceId, MediaType
 
+Response:
 DeviceId MediaType
 -------- ---------
 0        SSD
 
+Explanation:
+Here, the disk ID (in column labeled as 'DeviceId', that means) and importantly, disk type (which is meant as 'MediaType') are retrieved
+by command Get-PhysicalDisk, which find data about physical parameters of disk. The DeviceId (disk ID) is 0 (disk order), while MediaType 
+(disk type) is SSD, which means solid-state drive, modern storage device.
+
+
+
+
 Command:
 Get-Disk | Select-Object FriendlyName, BusType
 
+Response:
 FriendlyName        BusType
 ------------        -------
 KBG60ZNV512G KIOXIA NVMe
+
+
+Explanation:
+The prompt resulted in display of disk name (FriendlyName - KBG60ZNV512G KIOXIA) and physical interface protocol (BusType), through which disk exchanges data
+from motherboard, in this case, displayed as NVMe, that means ultra-fast protocol for SSD on PCIe lanes.
 
 
 
@@ -40,8 +70,11 @@ KBG60ZNV512G KIOXIA NVMe
 Command:
 Get-CimInstance Win32_Bios | Select-Object @{N="FirmwareType";E={$env:firmware_type}}, SMBIOSBIOSVersion, ReleaseDate
 
+Response:
 FirmwareType SMBIOSBIOSVersion ReleaseDate
 ------------ ----------------- -----------
 UEFI         FA607NUQ.300      1/8/2026 5:00:00 AM
 
 
+Explanation: 
+Here, the command Get-CimInstance
