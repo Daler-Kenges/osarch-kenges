@@ -77,4 +77,7 @@ UEFI         FA607NUQ.300      1/8/2026 5:00:00 AM
 
 
 Explanation: 
-Here, the command Get-CimInstance
+Here, the command Get-CimInstance fetches data from Win32_Bios (stores data about BIOS firmware). The property about firmware (FirmwareType in column means the identical thing)
+(@{N="FirmwareType";E={$env:firmware_type}}) is used, because Win32_Bios doesn't natively know the actual type of firmware and that has to be overcome, that finds value of
+UEFI, which means modern firmware standard. Retrieved System Management BIOS Version (SMBIOSBIOSVersion) value is FA607NUQ.300 (firmware version string), 
+while the release date (what meant ReleaseDate column label) is 1/8/2026 5:00:00 AM
