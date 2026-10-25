@@ -1,7 +1,7 @@
 # Lab 1 — Your first virtual machine
 
-Pair: Daler Kenges / no partner since it's solo work   Driver first half: <name>
-Machine: ASUS TUF Gaming A16 FA607NUQ Windows 11, guest Ubuntu Server 'Ubuntu 64-bit'
+Pair: Daler Kenges / no partner since it's single-person work   Driver first half: Daler Kenges
+Machine: ASUS TUF Gaming A16 FA607NU Windows 11, guest Ubuntu Server 'Ubuntu 64-bit'
 Date: 25.10.2026
 
 ## What I did
@@ -12,7 +12,7 @@ Date: 25.10.2026
 sudo rm /etc/hostname
 cat /etc/hostname          
 sudo reboot'
-5. Rolled back to clean-install: lab01-kenges (command that proves everything is fixed)
+5. Rolled back to clean-install: 'lab01-kenges' (command that proves everything is fixed)
 
 ## Resource justification
 My laptop has 16GB of RAM and 16 vCPU with over 200GB. I had chosen 4GB of RAM and 4 vCPU because it was the sufficient amount that would give the virtual machine good breathing room and let my OS, as well as websites retain wide space for operation. I chose 25GB of memory from my disk since it gave sufficient breathing room that would work at full capacity, more memory would would be otherwise wasted.
@@ -21,7 +21,7 @@ My laptop has 16GB of RAM and 16 vCPU with over 200GB. I had chosen 4GB of RAM a
 The VM boots; the break-and-rollback cycle is shown in the evidence below.
 
 ## What did not work the first time
-In the step 7 I had problems running the code in virtual machine. It display typing errors like component is undefined and etc. I applied bashing through script.sh method and only then the code ran properly
+In the step 7 I had problems running the code in virtual machine. It display typing errors like component is undefined and etc. I applied bashing through typing in single quotation marks for string moving (with Enter) like '' and executing 'script.sh' method and only then the code ran properly
 
 ## Evidence
 - [evidence/vm-settings.png](evidence/vm-settings.png) — CPU, memory and disk as configured
