@@ -1,24 +1,27 @@
 # Lab 1 — Your first virtual machine
 
-Pair: <you> / <partner>   Driver first half: <name>
-Machine: <your laptop and OS>, guest Ubuntu Server <version>
-Date: <dd.mm.2026>
+Pair: Daler Kenges / no partner since it's solo work   Driver first half: <name>
+Machine: ASUS TUF Gaming A16 FA607NUQ Windows 11, guest Ubuntu Server 'Ubuntu 64-bit'
+Date: 25.10.2026
 
 ## What I did
-1. Installed <hypervisor> <version>. Licence: <link>
-2. Created VM lab01-ubuntu: <n> vCPU, <n> GB RAM, 25 GB dynamic disk, NAT.
+1. Installed VirtualBox 7.2.22. Licence: [<link>](https://www.virtualbox.org/wiki/GPLv3)
+2. Created VM lab01-ubuntu: 4 vCPU, 4 GB RAM, 25 GB dynamic disk, NAT.
 3. Installed Ubuntu Server, took snapshot clean-install.
-4. Broke it: <the commands you ran>
-5. Rolled back to clean-install: <the commands that prove it is fixed>
+4. Broke it: 'cat /etc/hostname        
+sudo rm /etc/hostname
+cat /etc/hostname          
+sudo reboot'
+5. Rolled back to clean-install: lab01-kenges (command that proves everything is fixed)
 
 ## Resource justification
-<One paragraph, against your host's real totals from Lab 0.>
+My laptop has 16GB of RAM and 16 vCPU with over 200GB. I had chosen 4GB of RAM and 4 vCPU because it was the sufficient amount that would give the virtual machine good breathing room and let my OS, as well as websites retain wide space for operation. I chose 25GB of memory from my disk since it gave sufficient breathing room that would work at full capacity, more memory would would be otherwise wasted.
 
 ## Result
 The VM boots; the break-and-rollback cycle is shown in the evidence below.
 
 ## What did not work the first time
-<At least one thing: what I saw, what it turned out to be, what I did.>
+In the step 7 I had problems running the code in virtual machine. It display typing errors like component is undefined and etc. I applied bashing through script.sh method and only then the code ran properly
 
 ## Evidence
 - [evidence/vm-settings.png](evidence/vm-settings.png) — CPU, memory and disk as configured
