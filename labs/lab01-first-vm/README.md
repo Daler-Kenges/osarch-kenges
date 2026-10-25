@@ -5,7 +5,7 @@ Machine: ASUS TUF Gaming A16 FA607NUQ Windows 11, guest Ubuntu Server 'Ubuntu 64
 Date: 25.10.2026
 
 ## What I did
-1. Installed VirtualBox 7.2.22. Licence: [<link>](https://www.virtualbox.org/wiki/GPLv3)
+1. Installed VirtualBox 7.2.22. Licence: https://www.virtualbox.org/wiki/GPLv3
 2. Created VM lab01-ubuntu: 4 vCPU, 4 GB RAM, 25 GB dynamic disk, NAT.
 3. Installed Ubuntu Server, took snapshot clean-install.
 4. Broke it: 'cat /etc/hostname        
