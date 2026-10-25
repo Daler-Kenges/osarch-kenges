@@ -21,7 +21,13 @@ My laptop has 16GB of RAM and 16 vCPU with over 200GB. I had chosen 4GB of RAM a
 The VM boots; the break-and-rollback cycle is shown in the evidence below.
 
 ## What did not work the first time
-In the step 7 I had problems running the code in virtual machine. It display typing errors like component is undefined and etc. I applied bashing through typing in single quotation marks for string moving (with Enter) like ' ' and executing 'script.sh' method and only then the code ran properly
+In the step 7 I had problems running the code in virtual machine. It display typing errors like component is undefined and etc. I applied bashing through typing in single quotation marks for string moving (with Enter) like 
+'lsb_release -a
+hostname
+nproc
+free -h
+df -h /
+ip -br a' and executing 'script.sh' method and only then the code ran properly
 
 ## Evidence
 - [evidence/vm-settings.png](evidence/vm-settings.png) — CPU, memory and disk as configured
