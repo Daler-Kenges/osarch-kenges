@@ -1,7 +1,7 @@
 # Lab 2 — A Windows guest, and a network between them
 
 Pair: Daler Kenges / no partner (single person work)   Driver first half: Daler Kenges
-Machine: ASUS TUF Gaming A16 FA607NU: Windows 11, 16GB RAM, 8 cores/16 threads; guests Ubuntu Server + Windows 11 Enterprise eval
+Machine: ASUS TUF Gaming A16 FA607NU - Windows 11, 16GB RAM, 8 cores/16 threads; guests Ubuntu Server + Windows 11 Enterprise eval
 Date: 27.10.2026
 
 ## What I did
