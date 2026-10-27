@@ -23,7 +23,23 @@ Date: 27.10.2026
 | What I noticed | — | |
 
 ## What did not work the first time
-<At least one thing: what I saw, what it turned out to be, what I did.>
+Step 5
+1. THE GOAL:
+   - Identify the Ubuntu VM IP address using ip -br a.
+   - Configure a VirtualBox NAT Network port forwarding rule (Host Port 2222 -> Guest Port 22).
+   - Execute an SSH command from the Windows host to save the VM's network info into a file (ip-addr-linux.txt) inside a locally cloned GitHub repository folder structure (labs/lab02-windows-vm/evidence/).
+
+2. THE OBSTACLES & ERRORS:
+   - Pathing Error: Attempting to run the script inside C:\Windows\System32, resulting in an "OpenError: Could not find a part of the path".
+   - Service Error: Getting a "Connection refused" error when attempting to connect on port 2222 because the Ubuntu SSH server daemon (sshd) was installed but in an inactive (dead) state.
+   - Network Mirror Hang: Attempting to run sudo apt update to refresh repositories, which hung indefinitely due to a network routing or connectivity timeout to regional Almaty mirrors (://ubuntu.com).
+   - Redirection Syntax: The file output variable ($HOME) initially failing to drop cleanly onto the visual desktop space due to environmental pathing syntax.
+
+3. THE RESOLVED SOLUTIONS:
+   - Force-killed the hanging repository update via Ctrl + C.
+   - Bypassed the update and explicitly started the SSH service inside Ubuntu using sudo systemctl start ssh.
+   - Resolved the host pathing problem by shifting from a relative lab path to an explicit profile directory format (> "$env:USERPROFILE\Desktop\ip-addr-Linux.txt") to successfully generate a 743-byte text artifact.
+   - Located the final proof file via a dynamic PowerShell filter command and uploaded it directly into the Daler-Kenges/osarch-kenges GitHub repository workspace.
 
 ## Evidence
 - [evidence/ipconfig-windows.txt](evidence/ipconfig-windows.txt) — Windows address
