@@ -5,9 +5,9 @@ Machine: ASUS TUF Gaming A16 FA607NU - Windows 11, 16GB RAM, 8 cores/16 threads;
 Date: 27.10.2026
 
 ## What I did
-1. Downloaded Windows 11 Enterprise evaluation. Licence: <Evaluation Center link>
+1. Downloaded Windows 11 Enterprise evaluation. Licence: no license, since it was free for 90 days.
 2. Created lab02-windows: 2 vCPU, 4 GB, 64 GB thin, UEFI + Secure Boot, vTPM.
-3. Network mode: <mode>, both guests. Why: <your reason>
+3. Network mode: NAT-network, both guests. Why: I implemented NAT Network because both guests must see each other and the internet, and I can't use bridged mode on campus Wi-Fi, where I'm doing the lab work.
 4. Ping Ubuntu → Windows timed out because <why>. Fixed with: <the firewall rule command>
 5. Overcommitment: set <x> GB + <y> GB on a <z> GB host.
 
