@@ -41,6 +41,11 @@ Step 5
    - Resolved the host pathing problem by shifting from a relative lab path to an explicit profile directory format (> "$env:USERPROFILE\Desktop\ip-addr-Linux.txt") to successfully generate a 743-byte text artifact.
    - Located the final proof file via a dynamic PowerShell filter command and uploaded it directly into the Daler-Kenges/osarch-kenges GitHub repository workspace.
 
+
+Step 6 issue.
+While I didn't have problem fixing firewall, running code with all 4 prompts caused issue with resolution caused in this prompt: ssh -p 2222 kenges@127.0.0.1 "echo 'From Ubuntu: ping to Windows Host'; ping -c 4 10.0.2.2; echo 'From Ubuntu: ping to Internet'; ping -c 4 ubuntu.com" > "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'From Windows: ping to Ubuntu Guest' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'NAT Network: Direct Inbound Ping restricted. Port 2222 Forwarding Operational.' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'From Windows: ping to Internet' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; ping ubuntu.com >> "$env:USERPROFILE\Desktop\ping-both-ways.txt".
+To fix this, I altered the command to this form: ssh -p 2222 kenges@127.0.0.1 "echo 'From Ubuntu: ping to Windows Host'; ping -c 4 10.0.2.2; echo ''; echo 'From Ubuntu: ping to Internet'; ping -c 4 8.8.8.8" > "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "nFrom Windows: ping to Ubuntu GuestnNAT Network: Direct Inbound Ping restricted. Port 2222 Forwarding Operational." >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "`nFrom Windows: ping to Internet" >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; ping 8.8.8.8 >> "$env:USERPROFILE\Desktop\ping-both-ways.txt", where some server names got changes to bypass resolution error (ubuntu.com -> 8.8.8.8). The empty prompt line meant the file was created, which I found in desktop folder.
+
 ## Evidence
 - [evidence/ipconfig-windows.txt](evidence/ipconfig-windows.txt) — Windows address
 - [evidence/ip-addr-linux.txt](evidence/ip-addr-linux.txt) — Ubuntu address
