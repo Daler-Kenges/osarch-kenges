@@ -8,8 +8,8 @@ Date: 27.10.2026
 1. Downloaded Windows 11 Enterprise evaluation. Licence: no license, since it was free for 90 days.
 2. Created lab02-windows: 2 vCPU, 4 GB, 64 GB thin, UEFI + Secure Boot, vTPM.
 3. Network mode: NAT-network, both guests. Why: I implemented NAT Network because both guests must see each other and the internet, and I can't use bridged mode on campus Wi-Fi, where I'm doing the lab work.
-4. Ping Ubuntu → Windows timed out because <why>. Fixed with: <the firewall rule command>
-5. Overcommitment: set <x> GB + <y> GB on a <z> GB host.
+4. Ping Ubuntu → Windows timed out because the VMs couldn't recognize each other in the internet. Fixed with: ssh -p 2222 kenges@127.0.0.1 "echo 'From Ubuntu: ping to Windows Host'; ping -c 4 10.0.2.2; echo ''; echo 'From Ubuntu: ping to Internet'; ping -c 4 8.8.8.8" > "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "nFrom Windows: ping to Ubuntu GuestnNAT Network: Direct Inbound Ping restricted. Port 2222 Forwarding Operational." >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "`nFrom Windows: ping to Internet" >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; ping 8.8.8.8 >> "$env:USERPROFILE\Desktop\ping-both-ways.txt", where some server names got changes to bypass resolution error (ubuntu.com -> 8.8.8.8)
+5. Overcommitment: set 10 GB for Ubuntu + 10 GB for Windows guests on a 16 GB host.
 
 ## Network diagram
 <diagram or image>
@@ -17,10 +17,10 @@ Date: 27.10.2026
 ## Result
 | | Before | After |
 |---|---|---|
-| Host RAM in use |8.1GB| |
-| Available |7.2GB| |
-| Committed / Swap used |11.1GB| |
-| What I noticed | — | |
+| Host RAM in use |8,1GB|15,1 |
+| Available |7,2GB| 211MB|
+| Committed / Swap used |11.1GB| 32GB|
+| What I noticed | — | Ubuntu was frozen for a minute, Windows lagged and stuttered until I closed tabs|
 
 ## What did not work the first time
 Step 5
@@ -45,6 +45,9 @@ Step 5
 Step 6 issue.
 While I didn't have problem fixing firewall, running code with all 4 prompts caused issue with resolution caused in this prompt: ssh -p 2222 kenges@127.0.0.1 "echo 'From Ubuntu: ping to Windows Host'; ping -c 4 10.0.2.2; echo 'From Ubuntu: ping to Internet'; ping -c 4 ubuntu.com" > "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'From Windows: ping to Ubuntu Guest' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'NAT Network: Direct Inbound Ping restricted. Port 2222 Forwarding Operational.' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo 'From Windows: ping to Internet' >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; ping ubuntu.com >> "$env:USERPROFILE\Desktop\ping-both-ways.txt".
 To fix this, I altered the command to this form: ssh -p 2222 kenges@127.0.0.1 "echo 'From Ubuntu: ping to Windows Host'; ping -c 4 10.0.2.2; echo ''; echo 'From Ubuntu: ping to Internet'; ping -c 4 8.8.8.8" > "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "nFrom Windows: ping to Ubuntu GuestnNAT Network: Direct Inbound Ping restricted. Port 2222 Forwarding Operational." >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; echo "`nFrom Windows: ping to Internet" >> "$env:USERPROFILE\Desktop\ping-both-ways.txt"; ping 8.8.8.8 >> "$env:USERPROFILE\Desktop\ping-both-ways.txt", where some server names got changes to bypass resolution error (ubuntu.com -> 8.8.8.8). The empty prompt line meant the file was created, which I found in desktop folder.
+
+Step 7 issue.
+When I booted both VMs with 10GB RAM, neither started to stutter since the capacity wasn't fully applied. In order to fix this, I opened browser in Windows VM with over 20 tabs with 5 of them playing 4k video and as a result, the machine experienced severe lagging. To make Ubuntu use vast majority of the RAM, I had to write down command {python3 -c "import time; print('Filling 8 GB...'); data = bytearray(8 * 1024 * 1024 * 1024); input('Ready! Memory is full. Press Enter to free space...')"} which forced Ubuntu to request memory, which resulted in complete freezing of this VM.
 
 ## Evidence
 - [evidence/ipconfig-windows.txt](evidence/ipconfig-windows.txt) — Windows address
