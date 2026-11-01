@@ -19,7 +19,7 @@ Date: 27.10.2026
      [VMware NAT · VMnet8 · 192.168.80.0/24]
           /                        \
 lab01-ubuntu                  lab02-windows
-192.168.80.130                192.168.80.131
+127.0.0.1/8                192.168.80.131
 
 ## Result
 | | Before | After |
