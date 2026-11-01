@@ -17,9 +17,9 @@ Date: 27.10.2026
 ## Result
 | | Before | After |
 |---|---|---|
-| Host RAM in use | | |
-| Available | | |
-| Committed / Swap used | | |
+| Host RAM in use |8.1GB| |
+| Available |7.2GB| |
+| Committed / Swap used |11.1GB| |
 | What I noticed | — | |
 
 ## What did not work the first time
