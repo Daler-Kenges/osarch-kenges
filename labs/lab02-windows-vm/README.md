@@ -12,7 +12,8 @@ Date: 27.10.2026
 5. Overcommitment: set 10 GB for Ubuntu + 10 GB for Windows guests on a 16 GB host.
 
 ## Network diagram
-                 Internet
+```
+                  Internet
                      |
                      |
        Host Laptop 10.0.2.2 (campus Wi-Fi)
@@ -23,6 +24,7 @@ Date: 27.10.2026
           /                     \
     lab01-ubuntu           lab02-windows
       10.0.2.4               10.0.2.15
+```
 
 ## Result
 | | Before | After |
