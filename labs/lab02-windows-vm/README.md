@@ -17,9 +17,9 @@ Date: 27.10.2026
 ## Result
 | | Before | After |
 |---|---|---|
-| Host RAM in use |8,1GB|15,1 |
-| Available |7,2GB| 211MB|
-| Committed / Swap used |11.1GB| 32GB|
+| Host RAM in use |8,1GB|15,1GB |
+| Available |7,2GB| 235MB|
+| Committed / Swap used |11.1GB| 32.1GB|
 | What I noticed | — | Ubuntu was frozen for a minute, Windows lagged and stuttered until I closed tabs|
 
 ## What did not work the first time
