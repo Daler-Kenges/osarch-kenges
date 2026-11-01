@@ -12,7 +12,14 @@ Date: 27.10.2026
 5. Overcommitment: set 10 GB for Ubuntu + 10 GB for Windows guests on a 16 GB host.
 
 ## Network diagram
-<diagram or image>
+              Internet
+                 |
+      Host laptop 10.20.5.37 (campus Wi-Fi)
+                 |
+     [VMware NAT · VMnet8 · 192.168.80.0/24]
+          /                        \
+lab01-ubuntu                  lab02-windows
+192.168.80.130                192.168.80.131
 
 ## Result
 | | Before | After |
