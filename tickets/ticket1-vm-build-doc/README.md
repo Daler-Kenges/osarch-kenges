@@ -7,23 +7,35 @@
 > Hi, we have someone starting on Monday and he needs a test computer set up. Nothing special, just so he can try things without breaking anything. Can you write down how to do it so I can do the next one myself? Thanks
 
 ## 2. What was actually needed
-* **Omissions in the request:** The requester did not specify host machine resource limits, operating system requirements, target development stack, or network access requirements.
-* **Flaws in the request:** The email asks for "a test computer" in the singular, but the technical requirement demands building both a Linux guest and a Windows guest. Additionally, "without breaking anything" requires configuring hypervisor-level snapshotting/rollbacks, which was not mentioned.
+* **Omissions in the request:**
+  * **Host hardware constraints:** The requester did not specify the physical machine's hardware budget (available RAM, CPU cores, or free disk storage), leaving the hypervisor memory ceiling undefined[cite: 2].
+  * **Target toolchain & runtime:** Omitted which runtime environments, compilers, or databases the developer requires, as well as whether internal corporate network shares or external repositories are needed[cite: 2].
+  * **Audience baseline:** Failed to define the office manager's technical baseline or whether host prerequisites (such as CPU virtualization flags in BIOS/UEFI) were configured[cite: 4].
+
+* **Flaws in the request:**
+  * **Singular machine vs. cross-platform testing:** The request asks for "a test computer" in the singular[cite: 4]. Modern application development requires testing compatibility across both POSIX-compliant Linux and Windows environments, necessitating two distinct virtual machines[cite: 4].
+  * **"Without breaking anything" without rollback capability:** A non-technical user assumes a computer can simply be "tried out" without risk[cite: 4]. Without configuring baseline hypervisor snapshots, testing unverified code or broken packages will permanently corrupt the OS, necessitating repeated rebuilds from scratch[cite: 4].
+  * **Replication feasibility:** The requester assumes she can repeat the setup herself after reading simple notes[cite: 4]. Hypervisor setup requires precise storage provisioning, adapter configuration, and guest driver integration, demanding an exhaustive, beginner-level runbook[cite: 4].
+
 * **Clarifying questions for requester:**
-  1. What software stack or toolchain will the new developer run?
-  2. Does the test environment need access to internal company network shares or only the external internet?
-  3. Does the developer require administrative rights inside the VM?
+  1. What is the physical specification (RAM, CPU, and free disk space) of the developer's workstation[cite: 2]?
+  2. Does the developer require access to internal network shares, company staging servers, or only outbound public internet access[cite: 2]?
+  3. Does the developer need specific IDEs, Docker, or root/administrative privileges inside the guest OS?
+  4. Should the machine retain long-term state, or be reverted to a clean snapshot regularly[cite: 4]?
+
 * **Assumptions made:**
-  * Hypervisor choice: [VirtualBox / VMware Workstation / Hyper-V].
-  * Guest OS choices: Ubuntu 24.04 LTS (for standard web/cloud dev) and Windows 10/11 Development evaluation (for desktop/client dev).
-  * Isolated network layout using NAT to preserve host network security while providing internet and inter-VM communication.
+  * **Hypervisor:** Selected Oracle VirtualBox 7.2.20 due to zero software licensing cost, strong cross-platform support, and straightforward GUI snapshot management for non-technical users[cite: 4].
+  * **Operating Systems:** Deployed Ubuntu 24.04 LTS (for containerized, backend, and POSIX development) and Windows 11 Enterprise Evaluation (for client/desktop software testing)[cite: 4].
+  * **Network Architecture:** Configured a dedicated **NAT Network** (`NatNetwork`, subnet `10.0.2.0/24`) with built-in DHCP[cite: 5]. Default VirtualBox NAT isolates VMs from each other; NAT Network allows mutual ICMP ping and inter-guest communication while isolating the test environment from the physical office LAN[cite: 4, 5].
+  * **Storage Provisioning:** Used **Dynamically Allocated VDI** disks (25 GB for Ubuntu, 50 GB for Windows) to prevent exhausting the host's 98 GB free storage ceiling while leaving adequate overhead for snapshots and host paging files[cite: 4].
+  * **Build Guide Scope:** Structured `BUILD.md` as an end-to-end, screenshot-guided manual assuming zero prior virtualization knowledge, explaining the functional reason behind every selected setting[cite: 4].
 
 ## 3. What I did
 ### 3.1 Host Sizing & Resource Math
-* **Host specs:** [e.g., 16 GB physical RAM, 8 CPU cores, 512 GB NVMe SSD (210 GB free)].
-* **Linux VM allocation:** [e.g., 4 GB RAM, 2 vCPUs, 30 GB dynamically allocated disk].
-* **Windows VM allocation:** [e.g., 6 GB RAM, 2 vCPUs, 60 GB dynamically allocated disk].
-* **Allocation reasoning:** Total concurrent guest memory allocation is 10 GB, leaving 6 GB exclusively for the host OS and baseline background services to prevent host memory exhaustion and disk thrashing.
+* **Host specs:** [16 GB physical RAM, 8 CPU cores and 16 threads, 512 GB NVMe SSD (98 GB free)].
+* **Linux VM allocation:** [4 GB RAM, 2 vCPUs, 25 GB dynamically allocated disk].
+* **Windows VM allocation:** [4 GB RAM, 4 vCPUs, 50 GB dynamically allocated disk].
+* **Allocation reasoning:** Total concurrent guest memory allocation is 8 GB, leaving 8 GB exclusively for the host OS and baseline background services to prevent host memory exhaustion and disk thrashing. Using 6 vCPU leaves ample processing power for host scheduling without CPU contention or context-switching overhead. Windows has higher baseline GUI and background telemetry overhead, justifying 4 vCPUs for smooth responsiveness, whereas Linux runs leanly and performs well on 2 vCPUs. Also, because I have only 98 GB of memory in storage, using dynamically allocated disks ensures that while both guests have access to 75 GB total capacity, they initially consume only ~35 GB of actual physical space. This leaves ~63 GB of uncommitted host storage for VirtualBox swap/pagefiles, snapshots (06-snapshot-list.png), host operating system cache, and developer dependencies, preventing disk exhaustion.
 
 ### 3.2 Non-Default Hypervisor Settings
 * **Setting 1:** [e.g., Network mode changed from NAT Network to NAT with port forwarding / Internal Network].
