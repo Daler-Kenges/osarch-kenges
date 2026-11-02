@@ -118,6 +118,7 @@ In VirtualBox Manager, click **Machine** > **New**. Set Name to `dev-windows-tes
 
 > **Check:** The wizard advances to the Hardware configuration screen.
 
+(Refer back to Step 5 and evidence/01-new-vm-wizard.png for the initial wizard interface).
 ---
 
 ### Step 11. Configure Windows Hardware, TPM 2.0 & EFI
@@ -138,6 +139,7 @@ Select **Create a Virtual Hard Disk Now**, set the size to **50.00 GB**, and sel
 
 > **Check:** Click **Finish**. `dev-windows-test` appears in the left panel.
 
+(Refer back to Step 7 and evidence/02-disk-settings.png for the VDI storage allocation dialog)
 ---
 
 ### Step 13. Attach Windows to the NAT Network
