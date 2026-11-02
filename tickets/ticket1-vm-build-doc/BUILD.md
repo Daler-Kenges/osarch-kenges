@@ -78,7 +78,7 @@ Move the **Base Memory** slider to **4,096 MB** (4 GB) and set **Processors** to
 
 Select **Create a Virtual Hard Disk Now**, set the size to **25.00 GB**, and confirm the disk format is set to **VDI (VirtualBox Disk Image)** with **Dynamically allocated** storage.
 
-*Why dynamically allocated VDI:* A "Fixed-size" disk immediately takes 25 GB of physical space from the laptop drive. A "Dynamically allocated" disk starts under 100 MB and grows only as the developer writes files, preventing the host laptop from running out of disk space.
+*Why dynamically allocated VDI:* A "Fixed-size" disk immediately reserves and locks the full 25 GB on your physical laptop drive even while empty. A "Dynamically allocated" disk only consumes space on your physical hard drive as files are actually created inside the virtual machine, preventing the host computer from running out of disk storage.
 
 > **Check:** Click **Finish**. `dev-linux-test` appears in the left panel with the status **Powered Off**.
 
