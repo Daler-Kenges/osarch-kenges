@@ -1,6 +1,10 @@
 # Ticket 1 – New developer starts Monday, needs a test machine
 
-## 2. Requirements Analysis, Scope Gaps & Assumptions
+## 1. What was asked
+> "Hi, we have someone starting on Monday and he needs a test computer set up. Nothing special, just so he can try things without breaking anything. Can you write down how to do it so I can do the next one myself? Thanks"
+> — Aigerim T. (Office Manager)
+
+## 2. What was actually needed
 
 ### 2.1 The Ticket: Literal Request vs. Operational Reality
 The incoming ticket presents a classic non-technical request:
@@ -21,25 +25,25 @@ The incoming ticket presents a classic non-technical request:
 A developer cannot validate software within a generic, unconfigured environment. At a minimum, a modern testbed requires both a standard POSIX/Linux environment (Ubuntu 24.04 LTS) for containerized and backend workflows, and a Windows environment (Windows 11 Enterprise) for client software, Active Directory interoperability, and cross-platform binary compatibility.
 
 #### 2. "Without breaking anything" — breaking what, and how do we recover?
-* **Host Protection:** A virtual machine isolates the host system's kernel, file systems, and hardware drivers from experimental binaries, unverified packages, and configuration drift.
-* **Network Protection:** Segmenting the VMs away from the office LAN prevents runaway test services or IP conflicts from impacting company equipment.
-* **Rollback via Snapshots:** When the developer inevitably breaks the guest OS (e.g., corrupted kernel packages, registry errors, dependency deadlocks), reinstalling the OS wastes hours. Hypervisor baseline snapshots (`Base-Clean-Install`) enable an instantaneous rollback to an pristine state without hypervisor reinstallation.
+- **Host Protection:** A virtual machine isolates the host system's kernel, file systems, and hardware drivers from experimental binaries, unverified packages, and configuration drift.
+- **Network Protection:** Segmenting the VMs away from the office LAN prevents runaway test services or IP conflicts from impacting company equipment.
+- **Rollback via Snapshots:** When the developer inevitably breaks the guest OS (e.g., corrupted kernel packages, registry errors, dependency deadlocks), reinstalling the OS wastes hours. Hypervisor baseline snapshots (`Base-Clean-Install`) enable an instantaneous rollback to a pristine state without hypervisor reinstallation.
 
 #### 3. How much memory and disk does the host computer have?
 The request omitted the physical workstation's hardware budget. Running two concurrent guests requires careful resource budgeting to avoid host memory exhaustion:
-* **RAM Allocation:** Allocated 4,096 MB to Linux and 4,077 MB to Windows (totaling ~8 GB), leaving at least 8 GB of physical RAM for the host OS on a standard 16 GB workstation.
-* **Storage Allocation:** Provisioned Dynamically Allocated Virtual Disk Images (VDI)—25 GB for Ubuntu and 50 GB for Windows. Dynamic provisioning ensures the VMs consume only active disk blocks, preserving physical host storage.
+- **RAM Allocation:** Allocated 4,096 MB to Linux and 4,096 MB to Windows (totaling 8 GB), leaving 8 GB of physical RAM for the host OS on a standard 16 GB workstation.
+- **Storage Allocation:** Provisioned Dynamically Allocated Virtual Disk Images (VDI)—25 GB for Ubuntu and 50 GB for Windows. Dynamic provisioning ensures the VMs consume only active disk blocks, preserving physical host storage.
 
 #### 4. Does the test machine need the internet? Do the two guests need to see each other?
-* **Internet Reachability:** Developers continuously require outbound network access to fetch public packages (`apt`, `npm`, `pip`, Windows updates) and clone remote repositories.
-* **Inter-Guest Visibility:** Validating client-server software requires bidirectional network communication between the Linux and Windows guests.
-* **Network Mode Selection:** Default VirtualBox NAT isolates VMs from one another, while Bridged Networking exposes guest test services directly to the physical office subnet. A dedicated **NAT Network (`NatNetwork`, 10.0.2.0/24)** was selected because it enables mutual guest-to-guest ICMP/TCP communication and outbound WAN routing while isolating the entire test environment from the corporate physical LAN.
+- **Internet Reachability:** Developers continuously require outbound network access to fetch public packages (`apt`, `npm`, `pip`, Windows updates) and clone remote repositories.
+- **Inter-Guest Visibility:** Validating client-server software requires bidirectional network communication between the Linux and Windows guests.
+- **Network Mode Selection:** Default VirtualBox NAT isolates VMs from one another, while Bridged Networking exposes guest test services directly to the physical office subnet. A dedicated **NAT Network (`NatNetwork`, 10.0.2.0/24)** was selected because it enables mutual guest-to-guest ICMP/TCP communication and outbound WAN routing while isolating the entire test environment from the corporate physical LAN.
 
 #### 5. Which hypervisor, which licence, and which ISO?
 To ensure the office manager can replicate the build legally without incurring licensing costs:
-* **Hypervisor:** Oracle VirtualBox 7.x base package, distributed under the GNU General Public License (GPLv2)—100% free and legal for commercial office deployment without licensing fees.
-* **Linux Guest:** Ubuntu 24.04 LTS (Open Source, free for commercial and development use).
-* **Windows Guest:** Windows 11 Enterprise Evaluation ISO (Official Microsoft 90-day evaluation image, legal for testing without upfront commercial licensing).
+- **Hypervisor:** Oracle VirtualBox 7.x base package, distributed under the GNU General Public License (GPLv2)—100% free and legal for commercial office deployment without licensing fees.
+- **Linux Guest:** Ubuntu 24.04 LTS (Open Source, free for commercial and development use).
+- **Windows Guest:** Windows 11 Enterprise Evaluation ISO (Official Microsoft 90-day evaluation image, legal for testing without upfront commercial licensing).
 
 #### 6. Who is the reader?
 The primary reader is Aigerim, an Office Manager. The documentation cannot use shorthand like "configure your network adapter" or "install packages via shell." Every instruction in `BUILD.md` specifies the exact menu items to click, flags to select, terminal commands to copy, and visual checkpoints to look for before moving to the next step.
@@ -58,38 +62,48 @@ Because the office manager was unavailable for immediate technical consultation,
 | How frequently will the environment need to be restored to a clean state? | Assumed high volatility; established an initial `Base-Clean-Install` snapshot immediately following OS setup and verification. |
 
 ## 3. What I did
+
 ### 3.1 Host Sizing & Resource Math
-* **Host specs:** [16 GB physical RAM, 8 CPU cores and 16 threads, 512 GB NVMe SSD (98 GB free)].
-* **Linux VM allocation:** [4 GB RAM, 2 vCPUs, 25 GB dynamically allocated disk].
-* **Windows VM allocation:** [4 GB RAM, 4 vCPUs, 50 GB dynamically allocated disk].
-* **Allocation reasoning:** Total concurrent guest memory allocation is 8 GB, leaving 8 GB exclusively for the host OS and baseline background services to prevent host memory exhaustion and disk thrashing. Using 6 vCPU leaves ample processing power for host scheduling without CPU contention or context-switching overhead. Windows has higher baseline GUI and background telemetry overhead, justifying 4 vCPUs for smooth responsiveness, whereas Linux runs leanly and performs well on 2 vCPUs. Also, because I have only 98 GB of memory in storage, using dynamically allocated disks ensures that while both guests have access to 75 GB total capacity, they initially consume only ~35 GB of actual physical space. This leaves ~63 GB of uncommitted host storage for VirtualBox swap/pagefiles, snapshots (06-snapshot-list.png), host operating system cache, and developer dependencies, preventing disk exhaustion.
+- **Host specs:** 16 GB physical RAM, 8 CPU cores / 16 threads, 512 GB NVMe SSD (98 GB free).
+- **Linux VM allocation (`dev-linux-test`):** 4,096 MB RAM, 2 vCPUs, 25 GB dynamically allocated VDI disk.
+- **Windows VM allocation (`dev-windows-test`):** 4,096 MB RAM, 4 vCPUs, 50 GB dynamically allocated VDI disk.
+- **Allocation reasoning:** Total concurrent guest memory allocation is 8 GB, leaving 8 GB exclusively for the host operating system and background tasks to prevent host memory exhaustion and paging thrash. Allocating 6 vCPUs combined across the guests leaves processing capacity for host scheduling without excessive context switching. Windows 11 requires 4 vCPUs to run its background telemetry, indexing, and GUI smoothly, whereas Ubuntu Server operates efficiently on 2 vCPUs. With 98 GB free storage on the host drive, allocating dynamic disks ensures both VMs initially consume only ~35 GB combined, preserving ~63 GB for differential snapshots (`evidence/06-snapshot-list.png`), host swap files, and project build dependencies.
 
 ### 3.2 Non-Default Hypervisor Settings
-* **Setting 1:** [e.g., Network mode changed from NAT Network to NAT with port forwarding / Internal Network].
-  * *Reason:* [Explain why the default didn't work for inter-VM pinging or internet routing].
-* **Setting 2:** [e.g., Virtual disk provisioning changed to Dynamically Allocated].
-  * *Reason:* [Explain why this was chosen over Fixed Disk based on host storage limits].
+- **Network Mode (Standard NAT switched to NAT Network):** Default VirtualBox NAT uses a built-in isolated engine assigning identical addresses (like `10.0.2.15`) to each guest, preventing direct inter-VM routing. Switched both guests to a shared `NAT Network` (`NatNetwork`, `10.0.2.0/24`) with DHCP enabled, providing mutual pingability alongside outbound gateway routing.
+- **Storage Provisioning (Dynamically Allocated VDI over Fixed-Size):** Fixed allocation would immediately lock 75 GB of the host's 98 GB free storage. Dynamically allocated disks expand on demand as data is written, preventing disk exhaustion on the host laptop.
+- **Firmware & Security Settings for Windows 11:** Enabled EFI emulation (`Enable EFI`) and assigned a virtual TPM 2.0 module in the Motherboard configuration to satisfy Windows 11 installation prerequisites.
 
 ### 3.3 Execution Steps
-1. Configured base virtual machines via hypervisor GUI.
-2. Installed base operating systems using minimal official ISO images.
-3. Configured static hostnames and verified guest-to-guest IP visibility.
-4. Generated base snapshots before installing test development tooling.
+1. Created the global software-defined `NatNetwork` (`10.0.2.0/24`) within VirtualBox Manager Tools.
+2. Provisioned `dev-linux-test` (Ubuntu 24.04 Server) and `dev-windows-test` (Windows 11 Enterprise Evaluation) with assigned CPU, RAM, and dynamic storage profiles.
+3. Attached Network Adapter 1 of both machines to `NatNetwork` to confirm mutual Layer-3 subnet visibility.
+4. Installed base operating systems via guided setup, creating administrative accounts.
+5. Installed diagnostic utilities (`iputils-ping`) on Ubuntu and added an ICMP inbound allow rule on Windows Firewall.
+6. Conducted four-point bidirectional ICMP verification (`ping` between guests and to `8.8.8.8`).
+7. Cleanly powered off both virtual machines and created baseline snapshots named `Base-Clean-Install`.
 
 ### 3.4 Failure Encountered and Resolution
-* **Problem:** [e.g., Both VMs were assigned identical IP addresses (10.0.2.15) under default VirtualBox NAT adapters, preventing them from pinging each other].
-* **Resolution:** [e.g., Created a unified NAT Network adapter profile in VirtualBox, attached both VMs to this shared network segment, and confirmed distinct DHCP allocations].
-* What Went Wrong: Command Execution & Environment ChallengesMissing Minimal Networking Tools (iputils-ping)Issue: Attempting to execute ping inside the Ubuntu guest initially failed with a command not found error.   Resolution: Ubuntu's minimal server image does not package ICMP utilities by default. The package index had to be refreshed and the utility installed explicitly via:   Bashsudo apt update && sudo apt install -y iputils-ping
-Once installed, the guest operating system had the binary necessary to initiate ICMP echo requests.   Windows Firewall Blocking ICMP PacketsIssue: Even with network adapters properly attached to the same NatNetwork, ping requests sent from Ubuntu to the Windows VM (10.0.2.6) were dropped.   Resolution: Windows Defender Firewall blocks unsolicited incoming ICMPv4 traffic across all active profiles by default. The firewall had to be temporarily lowered to establish connectivity:DOSnetsh advfirewall set allprofiles state off
-To maintain host defense long-term, a persistent inbound allow rule targeting ICMPv4 (Allow-Ping) was subsequently registered before re-enabling firewall profiles.   Shell Tokenization Errors from Quoted / Clustered InputsIssue: Running ping commands repeatedly failed with 'ping -c 4 ...': command not found.   Resolution: Pasting commands with leading single quotation marks caused the Linux shell to interpret the entire line—arguments, flags, and executable name combined—as one single, nonexistent binary name. Stripping all quotation formatting and executing each command cleanly as an isolated single-line entry per prompt allowed bash to properly parse ping as the command, -c as the count switch, and the targets (8.8.8.8 / 10.0.2.6) as positional arguments. 
+- **Missing Networking Utilities on Ubuntu:**
+  - *Issue:* Executing `ping` on Ubuntu returned `command not found` because minimal server ISO images omit ICMP diagnostic packages by default.
+  - *Resolution:* Executed `sudo apt update && sudo apt install -y iputils-ping` to deploy the package.
+- **Windows Firewall Silently Dropping ICMP Requests:**
+  - *Issue:* Pinging the Windows guest (`10.0.2.6`) from Linux resulted in 100% packet loss despite valid adapter leases.
+  - *Resolution:* Windows Defender Firewall drops inbound ICMP by default. Permitted access by executing:
+    ```cmd
+    netsh advfirewall firewall add rule name="Allow-Ping" protocol=icmpv4:8,any dir=in action=allow profile=any
+    ```
+- **Shell Command Tokenization Errors:**
+  - *Issue:* Pasting command strings with leading quotes caused bash to interpret the command name and arguments as a single non-existent binary (`'ping -c 4 ...': command not found`).
+  - *Resolution:* Stripped all quotation wrappers and ran commands directly per prompt line, allowing the shell to parse the executable and positional flags properly.
 
 ## 4. Evidence
-* [evidence/01-new-vm-wizard.png](evidence/01-new-vm-wizard.png) — Confirms initial VM creation, CPU, and base memory allocations matching host calculations.
-* [evidence/02-disk-settings.png](evidence/02-disk-settings.png) — Proves virtual disk controller configuration and dynamic provisioning type.
-* [evidence/03-network-adapter.png](evidence/03-network-adapter.png) — Shows adapter attachment type and MAC address assignments.
-* [evidence/04-guest-uname.txt](evidence/04-guest-uname.txt) — Output of `uname -a` (Linux) and `systeminfo` (Windows) verifying kernel versions and OS installation.
-* [evidence/05-ping-between-guests.txt](evidence/05-ping-between-guests.txt) — Terminal logs proving mutual ping reachability between guests and outgoing ping to an external IP.
-* [evidence/06-snapshot-list.png](evidence/06-snapshot-list.png) — Shows the clean base-state snapshots created immediately following post-install configuration.
+- [evidence/01-new-vm-wizard.png](evidence/01-new-vm-wizard.png) — Confirms initial VM creation wizard parameters, including RAM and CPU sizing.
+- [evidence/02-disk-settings.png](evidence/02-disk-settings.png) — Proves virtual storage configuration and the selection of dynamically allocated VDI formatting.
+- [evidence/03-network-adapter.png](evidence/03-network-adapter.png) — Verifies attachment to the shared `NatNetwork` virtual switch and active cable connection.
+- [evidence/04-guest-uname.txt](evidence/04-guest-uname.txt) — Verifies kernel details from `uname -a` on Ubuntu and hardware-detected specs from `systeminfo` on Windows.
+- [evidence/05-ping-between-guests.txt](evidence/05-ping-between-guests.txt) — Proves 0% packet loss for bidirectional inter-guest pings and outbound routing to `8.8.8.8`.
+- [evidence/06-snapshot-list.png](evidence/06-snapshot-list.png) — Confirms `Base-Clean-Install` baseline snapshots were created for both machines in a clean Powered Off state.
 
 ## 5. What I would do differently
-* [Specify one concrete architectural or workflow change, e.g., automate guest provisioning with Vagrant or Packer scripts instead of manual GUI wizards to reduce setup time from 45 minutes to a single non-interactive command].
+Automate guest deployment using an Infrastructure-as-Code tool (such as Vagrant paired with a `Vagrantfile`) instead of clicking through manual VirtualBox GUI wizards. Scripting the build reduces end-to-end provisioning time from 45 minutes of active manual interaction to a single `vagrant up` execution, eliminating user error in wizard dialogs for non-technical operators like Aigerim.
