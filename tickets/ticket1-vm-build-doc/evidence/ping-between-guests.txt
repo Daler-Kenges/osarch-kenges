@@ -1,1 +1,59 @@
+======================================================================
+1. UBUNTU (dev-linux-test) -> PUBLIC INTERNET GATEWAY (8.8.8.8)
+======================================================================
+kenges@dev-linux-test:~$ ping -c 4 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=54 time=135 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=54 time=125 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=54 time=146 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=54 time=95.2 ms
 
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3529ms
+rtt min/avg/max/mdev = 95.154/126.167/146.231/17.371 ms
+
+======================================================================
+2. UBUNTU (dev-linux-test) -> WINDOWS GUEST (10.0.2.6)
+======================================================================
+kenges@dev-linux-test:~$ ping -c 4 10.0.2.6
+PING 10.0.2.6 (10.0.2.6) 56(84) bytes of data.
+64 bytes from 10.0.2.6: icmp_seq=1 ttl=128 time=2.16 ms
+64 bytes from 10.0.2.6: icmp_seq=2 ttl=128 time=1.79 ms
+64 bytes from 10.0.2.6: icmp_seq=3 ttl=128 time=1.68 ms
+64 bytes from 10.0.2.6: icmp_seq=4 ttl=128 time=1.36 ms
+
+--- 10.0.2.6 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3348ms
+rtt min/avg/max/mdev = 1.358/1.746/2.151/0.587 ms
+
+======================================================================
+3. WINDOWS (dev-windows-test) -> UBUNTU GUEST (10.0.2.7)
+======================================================================
+C:\Windows\System32>ping -n 4 10.0.2.7
+
+Pinging 10.0.2.7 with 32 bytes of data:
+Reply from 10.0.2.7: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.7: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.7: bytes=32 time<1ms TTL=64
+Reply from 10.0.2.7: bytes=32 time<1ms TTL=64
+
+Ping statistics for 10.0.2.7:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+======================================================================
+4. WINDOWS (dev-windows-test) -> PUBLIC INTERNET GATEWAY (8.8.8.8)
+======================================================================
+C:\Windows\System32>ping -n 4 8.8.8.8
+
+Pinging 8.8.8.8 with 32 bytes of data:
+Reply from 8.8.8.8: bytes=32 time=147ms TTL=128
+Reply from 8.8.8.8: bytes=32 time=130ms TTL=128
+Reply from 8.8.8.8: bytes=32 time=127ms TTL=128
+Reply from 8.8.8.8: bytes=32 time=135ms TTL=128
+
+Ping statistics for 8.8.8.8:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 127ms, Maximum = 147ms, Average = 134ms
