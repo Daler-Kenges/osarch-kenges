@@ -1,1 +1,10 @@
+=== Ubuntu Linux (dev-linux-test) ===
+kenges@dev-linux-test:~$ uname -a
+Linux dev-linux-test 6.8.0-47-generic #47-Ubuntu SMP PREEMPT_DYNAMIC Thu Oct 15 08:05:44 UTC 2026 x86_64 GNU/Linux
 
+=== Windows 11 Enterprise (dev-windows-test) ===
+C:\Windows\System32>systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type" /C:"Total Physical Memory"
+OS Name:                   Microsoft Windows 11 Enterprise Evaluation
+OS Version:                10.0.26100 N/A Build 26100
+System Type:               x64-based PC
+Total Physical Memory:     4,077 MB
