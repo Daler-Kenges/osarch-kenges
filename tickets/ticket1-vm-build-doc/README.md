@@ -1,34 +1,61 @@
 # Ticket 1 – New developer starts Monday, needs a test machine
 
-## 1. What was asked
-> From: Aigerim T. (Office Manager)
-> Subject: test machine for new dev
-> 
-> Hi, we have someone starting on Monday and he needs a test computer set up. Nothing special, just so he can try things without breaking anything. Can you write down how to do it so I can do the next one myself? Thanks
+## 2. Requirements Analysis, Scope Gaps & Assumptions
 
-## 2. What was actually needed
-* **Omissions in the request:**
-  * **Host hardware constraints:** The requester did not specify the physical machine's hardware budget (available RAM, CPU cores, or free disk storage), leaving the hypervisor memory ceiling undefined[cite: 2].
-  * **Target toolchain & runtime:** Omitted which runtime environments, compilers, or databases the developer requires, as well as whether internal corporate network shares or external repositories are needed[cite: 2].
-  * **Audience baseline:** Failed to define the office manager's technical baseline or whether host prerequisites (such as CPU virtualization flags in BIOS/UEFI) were configured[cite: 4].
+### 2.1 The Ticket: Literal Request vs. Operational Reality
+The incoming ticket presents a classic non-technical request:
+> *"Hi, we have someone starting on Monday and he needs a test computer set up. Nothing special, just so he can try things without breaking anything. Can you write down how to do it so I can do the next one myself? Thanks"*
 
-* **Flaws in the request:**
-  * **Singular machine vs. cross-platform testing:** The request asks for "a test computer" in the singular[cite: 4]. Modern application development requires testing compatibility across both POSIX-compliant Linux and Windows environments, necessitating two distinct virtual machines[cite: 4].
-  * **"Without breaking anything" without rollback capability:** A non-technical user assumes a computer can simply be "tried out" without risk[cite: 4]. Without configuring baseline hypervisor snapshots, testing unverified code or broken packages will permanently corrupt the OS, necessitating repeated rebuilds from scratch[cite: 4].
-  * **Replication feasibility:** The requester assumes she can repeat the setup herself after reading simple notes[cite: 4]. Hypervisor setup requires precise storage provisioning, adapter configuration, and guest driver integration, demanding an exhaustive, beginner-level runbook[cite: 4].
+| The Ticket Says | What the Ticket Actually Means | Architectural Decision |
+| :--- | :--- | :--- |
+| *"A test computer" (singular)* | Modern developers require multi-platform verification across both POSIX server environments and Windows enterprise clients. | Provision two distinct virtual machines: `dev-linux-test` (Ubuntu) and `dev-windows-test` (Windows 11). |
+| *"Nothing special"* | Developers need standard runtime dependencies, compilers, network diagnostics, and package management, not an empty or under-provisioned shell. | Provision baseline dev specs: 2 vCPUs / 4 GB RAM for Linux, 4 vCPUs / 4 GB RAM for Windows. |
+| *"Without breaking anything"* | The physical host OS, host registry, and local office LAN must be isolated from experimental code, malware, or misconfigured daemons. | Run guests in a sandboxed hypervisor network; take clean baseline snapshots (`Base-Clean-Install`) for one-click rollback. |
+| *"So I can do the next one myself"* | The runbook must be completely accessible to an Office Manager with no command-line or systems administration background. | Structure `BUILD.md` as an exhaustive, screenshot-driven procedural manual with zero assumed prerequisite jargon. |
 
-* **Clarifying questions for requester:**
-  1. What is the physical specification (RAM, CPU, and free disk space) of the developer's workstation[cite: 2]?
-  2. Does the developer require access to internal network shares, company staging servers, or only outbound public internet access[cite: 2]?
-  3. Does the developer need specific IDEs, Docker, or root/administrative privileges inside the guest OS?
-  4. Should the machine retain long-term state, or be reverted to a clean snapshot regularly[cite: 4]?
+---
 
-* **Assumptions made:**
-  * **Hypervisor:** Selected Oracle VirtualBox 7.2.20 due to zero software licensing cost, strong cross-platform support, and straightforward GUI snapshot management for non-technical users[cite: 4].
-  * **Operating Systems:** Deployed Ubuntu 24.04 LTS (for containerized, backend, and POSIX development) and Windows 11 Enterprise Evaluation (for client/desktop software testing)[cite: 4].
-  * **Network Architecture:** Configured a dedicated **NAT Network** (`NatNetwork`, subnet `10.0.2.0/24`) with built-in DHCP[cite: 5]. Default VirtualBox NAT isolates VMs from each other; NAT Network allows mutual ICMP ping and inter-guest communication while isolating the test environment from the physical office LAN[cite: 4, 5].
-  * **Storage Provisioning:** Used **Dynamically Allocated VDI** disks (25 GB for Ubuntu, 50 GB for Windows) to prevent exhausting the host's 98 GB free storage ceiling while leaving adequate overhead for snapshots and host paging files[cite: 4].
-  * **Build Guide Scope:** Structured `BUILD.md` as an end-to-end, screenshot-guided manual assuming zero prior virtualization knowledge, explaining the functional reason behind every selected setting[cite: 4].
+### 2.2 Core Analytical Questions
+
+#### 1. What does "nothing special" actually mean for a developer?
+A developer cannot validate software within a generic, unconfigured environment. At a minimum, a modern testbed requires both a standard POSIX/Linux environment (Ubuntu 24.04 LTS) for containerized and backend workflows, and a Windows environment (Windows 11 Enterprise) for client software, Active Directory interoperability, and cross-platform binary compatibility.
+
+#### 2. "Without breaking anything" — breaking what, and how do we recover?
+* **Host Protection:** A virtual machine isolates the host system's kernel, file systems, and hardware drivers from experimental binaries, unverified packages, and configuration drift.
+* **Network Protection:** Segmenting the VMs away from the office LAN prevents runaway test services or IP conflicts from impacting company equipment.
+* **Rollback via Snapshots:** When the developer inevitably breaks the guest OS (e.g., corrupted kernel packages, registry errors, dependency deadlocks), reinstalling the OS wastes hours. Hypervisor baseline snapshots (`Base-Clean-Install`) enable an instantaneous rollback to an pristine state without hypervisor reinstallation.
+
+#### 3. How much memory and disk does the host computer have?
+The request omitted the physical workstation's hardware budget. Running two concurrent guests requires careful resource budgeting to avoid host memory exhaustion:
+* **RAM Allocation:** Allocated 4,096 MB to Linux and 4,077 MB to Windows (totaling ~8 GB), leaving at least 8 GB of physical RAM for the host OS on a standard 16 GB workstation.
+* **Storage Allocation:** Provisioned Dynamically Allocated Virtual Disk Images (VDI)—25 GB for Ubuntu and 50 GB for Windows. Dynamic provisioning ensures the VMs consume only active disk blocks, preserving physical host storage.
+
+#### 4. Does the test machine need the internet? Do the two guests need to see each other?
+* **Internet Reachability:** Developers continuously require outbound network access to fetch public packages (`apt`, `npm`, `pip`, Windows updates) and clone remote repositories.
+* **Inter-Guest Visibility:** Validating client-server software requires bidirectional network communication between the Linux and Windows guests.
+* **Network Mode Selection:** Default VirtualBox NAT isolates VMs from one another, while Bridged Networking exposes guest test services directly to the physical office subnet. A dedicated **NAT Network (`NatNetwork`, 10.0.2.0/24)** was selected because it enables mutual guest-to-guest ICMP/TCP communication and outbound WAN routing while isolating the entire test environment from the corporate physical LAN.
+
+#### 5. Which hypervisor, which licence, and which ISO?
+To ensure the office manager can replicate the build legally without incurring licensing costs:
+* **Hypervisor:** Oracle VirtualBox 7.x base package, distributed under the GNU General Public License (GPLv2)—100% free and legal for commercial office deployment without licensing fees.
+* **Linux Guest:** Ubuntu 24.04 LTS (Open Source, free for commercial and development use).
+* **Windows Guest:** Windows 11 Enterprise Evaluation ISO (Official Microsoft 90-day evaluation image, legal for testing without upfront commercial licensing).
+
+#### 6. Who is the reader?
+The primary reader is Aigerim, an Office Manager. The documentation cannot use shorthand like "configure your network adapter" or "install packages via shell." Every instruction in `BUILD.md` specifies the exact menu items to click, flags to select, terminal commands to copy, and visual checkpoints to look for before moving to the next step.
+
+---
+
+### 2.3 Clarifying Inquiries vs. Working Assumptions
+
+Because the office manager was unavailable for immediate technical consultation, the build proceeded on engineering assumptions to meet the Monday deadline:
+
+| Clarifying Question for Requester | Working Assumption Made to Proceed |
+| :--- | :--- |
+| What are the physical host specifications (RAM, CPU cores, free SSD space)? | Assumed a standard corporate developer workstation (minimum 16 GB RAM, 6+ physical CPU cores, >80 GB free disk). |
+| What specific language stacks, IDEs, or database engines does the dev need? | Provisioned minimal OS baselines with networking tools (`iputils-ping`, PowerShell), allowing the developer to self-serve specific IDEs. |
+| Does the developer require access to internal company file shares or staging servers? | Isolated the machines to an internal `NatNetwork` with public WAN access; internal LAN access was denied by default for zero-trust isolation. |
+| How frequently will the environment need to be restored to a clean state? | Assumed high volatility; established an initial `Base-Clean-Install` snapshot immediately following OS setup and verification. |
 
 ## 3. What I did
 ### 3.1 Host Sizing & Resource Math
