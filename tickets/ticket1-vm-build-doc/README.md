@@ -107,3 +107,9 @@ Because the office manager was unavailable for immediate technical consultation,
 
 ## 5. What I would do differently
 Automate guest deployment using an Infrastructure-as-Code tool (such as Vagrant paired with a `Vagrantfile`) instead of clicking through manual VirtualBox GUI wizards. Scripting the build reduces end-to-end provisioning time from 45 minutes of active manual interaction to a single `vagrant up` execution, eliminating user error in wizard dialogs for non-technical operators like Aigerim.
+
+### 6. Academic Integrity & Generative AI Attribution Statement
+- **Tool Used:** Gemini (Google DeepMind)
+- **Role of AI:** Technical thought partner, documentation structuring, and troubleshooting advisor. 
+- **Role of Student:** Direct execution of all environment setup. The student manually installed VirtualBox, provisioned both guest virtual machines, configured host network parameters, ran all shell and terminal diagnostics, resolved firewall and syntax errors inside the virtual machines, captured and cropped all 6 mandatory evidence artifacts, and verified the accuracy of all recorded metrics.
+- **Verification:** All commands, IP allocations (10.0.2.6 / 10.0.2.7), and network routes were independently executed and verified against live terminal outputs on the host hardware before being committed to documentation.
