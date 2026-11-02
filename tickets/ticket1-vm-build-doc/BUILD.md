@@ -42,11 +42,11 @@ Download the Windows 11 Enterprise Evaluation ISO directly from the official [Mi
 
 ### Step 4. Create the Shared NAT Network
 
-In VirtualBox Manager, click the **Tools** icon at the top of the left panel, select **Network**, switch to the **NAT Networks** tab, and click **Create**[cite: 1].
+In VirtualBox Manager, click the **Tools** icon at the top of the left panel, select **Network**, switch to the **NAT Networks** tab, and click **Create**.
 
 *Why NAT Network and not NAT or Bridged:* Standard "NAT" isolates every virtual machine into its own private world, preventing the developer from testing connections between Linux and Windows. "Bridged" connects the virtual machines directly to the physical office Wi-Fi, which can cause IP conflicts and violate office security policies. A **NAT Network** creates a private internal virtual router (`10.0.2.0/24`) where the two guests can communicate freely with each other and reach the internet, while remaining completely shielded from the physical office LAN[cite: 1, 4, 5].
 
-> **Check:** The list displays `NatNetwork` with IPv4 Prefix `10.0.2.0/24` and the **DHCP** box checked[cite: 1].
+> **Check:** The list displays `NatNetwork` with IPv4 Prefix `10.0.2.0/24` and the **DHCP** box checked.
 
 ---
 
@@ -89,14 +89,13 @@ Select **Create a Virtual Hard Disk Now**, set the size to **25.00 GB**, and con
 
 ### Step 8. Configure Linux Network and Display
 
-Right-click `dev-linux-test`, select **Settings**, go to **Network** > **Adapter 1**, set **Attached to** to `NAT Network`, and select `NatNetwork` in the Name field[cite: 1]. Then go to **Display** and set Graphics Controller to `VMSVGA` with at least 64 MB video memory.
-
-*Why these settings:* Setting the adapter to `NatNetwork` plugs the Linux machine into the shared virtual switch (`10.0.2.0/24`)[cite: 1]. `VMSVGA` is the officially supported graphics driver for Linux guests, preventing GUI desktop freezes.
-
-> **Check:** Under Settings > Network > Adapter 1 > Advanced, the **Cable Connected** box is checked[cite: 1].
+Right-click `dev-linux-test`, select **Settings**, go to **Network** > **Adapter 1**, set **Attached to** to `NAT Network`, and select `NatNetwork` in the Name field.
 
 ![](evidence/03-network-adapter.png)
----
+
+*Why these settings:* Setting the adapter to `NatNetwork` connects the Linux virtual machine's virtual network interface (`enp0s3`) directly to our shared virtual switch (`10.0.2.0/24`). This enables the guest to automatically receive an IP address via DHCP, route outbound traffic to the internet, and communicate directly with the Windows VM without exposing either machine to the physical office LAN.
+
+> **Check:** Click **Advanced** and verify that the **Cable Connected** box is checked.
 
 ### Step 9. Install Ubuntu Server OS
 
@@ -144,11 +143,11 @@ Select **Create a Virtual Hard Disk Now**, set the size to **50.00 GB**, and sel
 
 ### Step 13. Attach Windows to the NAT Network
 
-Right-click `dev-windows-test`, select **Settings**, go to **Network** > **Adapter 1**, set **Attached to** to `NAT Network`, and select `NatNetwork` in the Name field[cite: 1].
+Right-click `dev-windows-test`, select **Settings**, go to **Network** > **Adapter 1**, set **Attached to** to `NAT Network`, and select `NatNetwork` in the Name field.
 
-*Why this configuration:* Attaching to `NatNetwork` places the Windows VM on the exact same virtual subnet as the Linux VM, allowing cross-platform client-server testing[cite: 1, 4].
+*Why this configuration:* Attaching to `NatNetwork` places the Windows VM on the exact same virtual subnet as the Linux VM, allowing cross-platform client-server testing.
 
-> **Check:** Verify that **Enable Network Adapter** and **Cable Connected** are both checked[cite: 1].
+> **Check:** Verify that **Enable Network Adapter** and **Cable Connected** are both checked.
 
 ---
 
@@ -203,31 +202,31 @@ Total Physical Memory:     4,077 MB
 
 ### Step 16. Allow Inbound Ping on Windows Defender Firewall
 
-Inside the Windows VM, click Start, type `cmd`, right-click **Command Prompt**, select **Run as administrator**, and run[cite: 7]:
+Inside the Windows VM, click Start, type `cmd`, right-click **Command Prompt**, select **Run as administrator**, and run:
 
 ```cmd
 netsh advfirewall firewall add rule name="Allow-Ping" protocol=icmpv4:8,any dir=in action=allow profile=any
 
 ```
 
-*Why this rule is necessary:* Windows Defender Firewall silently drops incoming ICMP echo requests by default. Adding this rule allows the Linux guest to ping the Windows machine while keeping all other unused ports securely closed[cite: 7].
+*Why this rule is necessary:* Windows Defender Firewall silently drops incoming ICMP echo requests by default. Adding this rule allows the Linux guest to ping the Windows machine while keeping all other unused ports securely closed.
 
-> **Check:** The command returns `Ok.`[cite: 7].
+> **Check:** The command returns `Ok.`.
 
 ---
 
 ### Step 17. Install Ping Utility on Ubuntu
 
-Inside the Ubuntu VM terminal, update the repository index and install the network tools package[cite: 6]:
+Inside the Ubuntu VM terminal, update the repository index and install the network tools package:
 
 ```bash
 sudo apt update && sudo apt install -y iputils-ping
 
 ```
 
-*Why this package is needed:* Minimal server images exclude network diagnostic tools by default to keep disk footprint low[cite: 6]. Installing `iputils-ping` provides the standard `ping` binary.
+*Why this package is needed:* Minimal server images exclude network diagnostic tools by default to keep disk footprint low. Installing `iputils-ping` provides the standard `ping` binary.
 
-> **Check:** Type `which ping` and press Enter. The console returns `/usr/bin/ping` or `/bin/ping`[cite: 6].
+> **Check:** Type `which ping` and press Enter. The console returns `/usr/bin/ping` or `/bin/ping`.
 
 ---
 
@@ -242,7 +241,7 @@ ping -c 4 8.8.8.8
 ```
 
 
-2. In **Ubuntu**, ping the Windows VM (`10.0.2.6`)[cite: 5]:
+2. In **Ubuntu**, ping the Windows VM (`10.0.2.6`):
 ```bash
 ping -c 4 10.0.2.6
 
@@ -299,7 +298,7 @@ Select `dev-linux-test` in the VirtualBox left panel, click the menu icon next t
 
 *Why baseline snapshots:* This fulfills the requirement to "try things without breaking anything". When the developer installs buggy packages, alters kernel modules, or corrupts configuration files, this snapshot allows anyone to restore the virtual machine back to a pristine state in seconds.
 
-> **Check:** Under the Snapshots panel for each VM, `Base-Clean-Install` appears directly above "Current State"[cite: 7].
+> **Check:** Under the Snapshots panel for each VM, `Base-Clean-Install` appears directly above "Current State".
 
 ---
 
@@ -323,7 +322,7 @@ If the developer breaks the operating system or corrupts configuration files, pe
 
 | Symptom / Error | Root Cause | Exact Fix for Aigerim |
 | --- | --- | --- |
-| **`'ping -c 4 ...': command not found`**[cite: 6, 7] | The command was pasted with an accidental quote mark (`'`) at the beginning, causing Linux to read the whole sentence as an invalid program name[cite: 6, 7]. | Press `Ctrl + C` in the terminal to clear the prompt, then type the command cleanly with no quotes: `ping -c 4 8.8.8.8`[cite: 7] |
-| **`ping 10.0.2.6` times out (100% packet loss)**[cite: 5, 7] | Windows Defender Firewall is silently dropping incoming ICMP ping packets by default[cite: 7]. | Open Command Prompt as Administrator inside Windows and run: `netsh advfirewall firewall add rule name="Allow-Ping" protocol=icmpv4:8,any dir=in action=allow profile=any`[cite: 7] |
+| **`'ping -c 4 ...': command not found`** | The command was pasted with an accidental quote mark (`'`) at the beginning, causing Linux to read the whole sentence as an invalid program name. | Press `Ctrl + C` in the terminal to clear the prompt, then type the command cleanly with no quotes: `ping -c 4 8.8.8.8` |
+| **`ping 10.0.2.6` times out (100% packet loss)** | Windows Defender Firewall is silently dropping incoming ICMP ping packets by default. | Open Command Prompt as Administrator inside Windows and run: `netsh advfirewall firewall add rule name="Allow-Ping" protocol=icmpv4:8,any dir=in action=allow profile=any` |
 | **`VERR_SSM_DATA_UNIT_FORMAT_CHANGED` (VM Aborted)** | The VM was closed abruptly or suspended while updating, corrupting the temporary memory state file. | Right-click the VM in VirtualBox Manager, select **Discard Saved State...** (or press `Ctrl + J`), then click **Start** normally. |
-| **Ubuntu desktop freezes / cursor stops responding** | High CPU contention on the host laptop caused an internal graphical session soft lock[cite: 6, 7]. | Press `Right-Ctrl + F3` on your keyboard to drop into a black text console (TTY3), log in with `kenges`, and run commands directly in the shell. |
+| **Ubuntu desktop freezes / cursor stops responding** | High CPU contention on the host laptop caused an internal graphical session soft lock. | Press `Right-Ctrl + F3` on your keyboard to drop into a black text console (TTY3), log in with `kenges`, and run commands directly in the shell. |
