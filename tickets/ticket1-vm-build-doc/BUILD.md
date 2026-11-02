@@ -48,8 +48,6 @@ In VirtualBox Manager, click the **Tools** icon at the top of the left panel, se
 
 > **Check:** The list displays `NatNetwork` with IPv4 Prefix `10.0.2.0/24` and the **DHCP** box checked[cite: 1].
 
-
-![](evidence/01-new-vm-wizard.png)
 ---
 
 ## Part 3: Ubuntu Linux VM Setup (`dev-linux-test`)
@@ -72,6 +70,8 @@ Move the **Base Memory** slider to **4,096 MB** (4 GB) and set **Processors** to
 
 > **Check:** Both resource sliders stay within the green band on the VirtualBox configuration screen.
 
+![](evidence/01-new-vm-wizard.png)
+
 ---
 
 ### Step 7. Configure Linux Virtual Disk
@@ -83,6 +83,8 @@ Select **Create a Virtual Hard Disk Now**, set the size to **25.00 GB**, and con
 > **Check:** Click **Finish**. `dev-linux-test` appears in the left panel with the status **Powered Off**.
 
 ![](evidence/02-disk-settings.png)
+
+**Note about evidences:** Use first two images later as reference for setting up `dev-windows-test` Windows VM.
 ---
 
 ### Step 8. Configure Linux Network and Display
