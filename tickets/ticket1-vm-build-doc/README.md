@@ -27,7 +27,7 @@ A developer cannot validate software within a generic, unconfigured environment.
 
 #### 3. How much memory and disk does the host computer have?
 The request omitted the physical workstation's hardware budget. Running two concurrent guests requires careful resource budgeting to avoid host memory exhaustion:
-* **RAM Allocation:** Allocated 4,096 MB to Linux and 4,096 MB to Windows (totaling ~8 GB), leaving at least 8 GB of physical RAM for the host OS on a standard 16 GB workstation.
+* **RAM Allocation:** Allocated 4,096 MB to Linux and 4,077 MB to Windows (totaling ~8 GB), leaving at least 8 GB of physical RAM for the host OS on a standard 16 GB workstation.
 * **Storage Allocation:** Provisioned Dynamically Allocated Virtual Disk Images (VDI)—25 GB for Ubuntu and 50 GB for Windows. Dynamic provisioning ensures the VMs consume only active disk blocks, preserving physical host storage.
 
 #### 4. Does the test machine need the internet? Do the two guests need to see each other?
