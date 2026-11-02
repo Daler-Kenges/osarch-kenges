@@ -44,7 +44,7 @@ Download the Windows 11 Enterprise Evaluation ISO directly from the official [Mi
 
 In VirtualBox Manager, click the **Tools** icon at the top of the left panel, select **Network**, switch to the **NAT Networks** tab, and click **Create**.
 
-*Why NAT Network and not NAT or Bridged:* Standard "NAT" isolates every virtual machine into its own private world, preventing the developer from testing connections between Linux and Windows. "Bridged" connects the virtual machines directly to the physical office Wi-Fi, which can cause IP conflicts and violate office security policies. A **NAT Network** creates a private internal virtual router (`10.0.2.0/24`) where the two guests can communicate freely with each other and reach the internet, while remaining completely shielded from the physical office LAN[cite: 1, 4, 5].
+*Why NAT Network and not NAT or Bridged:* Standard "NAT" isolates every virtual machine into its own private world, preventing the developer from testing connections between Linux and Windows. "Bridged" connects the virtual machines directly to the physical office Wi-Fi, which can cause IP conflicts and violate office security policies. A **NAT Network** creates a private internal virtual router (`10.0.2.0/24`) where the two guests can communicate freely with each other and reach the internet, while remaining completely shielded from the physical office LAN.
 
 > **Check:** The list displays `NatNetwork` with IPv4 Prefix `10.0.2.0/24` and the **DHCP** box checked.
 
