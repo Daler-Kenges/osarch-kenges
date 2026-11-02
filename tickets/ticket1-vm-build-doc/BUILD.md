@@ -48,6 +48,8 @@ In VirtualBox Manager, click the **Tools** icon at the top of the left panel, se
 
 > **Check:** The list displays `NatNetwork` with IPv4 Prefix `10.0.2.0/24` and the **DHCP** box checked[cite: 1].
 
+
+![](evidence/01-new-vm-wizard.png)
 ---
 
 ## Part 3: Ubuntu Linux VM Setup (`dev-linux-test`)
@@ -80,6 +82,7 @@ Select **Create a Virtual Hard Disk Now**, set the size to **25.00 GB**, and con
 
 > **Check:** Click **Finish**. `dev-linux-test` appears in the left panel with the status **Powered Off**.
 
+![](evidence/02-disk-settings.png)
 ---
 
 ### Step 8. Configure Linux Network and Display
@@ -90,6 +93,7 @@ Right-click `dev-linux-test`, select **Settings**, go to **Network** > **Adapter
 
 > **Check:** Under Settings > Network > Adapter 1 > Advanced, the **Cable Connected** box is checked[cite: 1].
 
+![](evidence/03-network-adapter.png)
 ---
 
 ### Step 9. Install Ubuntu Server OS
@@ -258,6 +262,8 @@ ping -n 4 8.8.8.8
 
 Copy all four terminal outputs into `evidence/05-ping-between-guests.txt`.
 
+![](evidence/05-ping-between-guests.txt)
+
 *Why four directional tests:* Verifies external internet access from both machines as well as bidirectional inter-guest routing across the virtual switch.
 
 > **Check:** All four commands show `0% packet loss` (or `0% loss`). Open `evidence/05-ping-between-guests.txt` to verify the recorded logs.
@@ -284,6 +290,8 @@ Close both virtual machines cleanly:
 ### Step 20. Create the `Base-Clean-Install` Baseline Snapshots
 
 Select `dev-linux-test` in the VirtualBox left panel, click the menu icon next to the VM name, select **Snapshots**, click **Take**, enter the name `Base-Clean-Install`, and click **OK**. Repeat this exact process for `dev-windows-test`.
+
+![](evidence/06-snapshot-list.png)
 
 *Why baseline snapshots:* This fulfills the requirement to "try things without breaking anything". When the developer installs buggy packages, alters kernel modules, or corrupts configuration files, this snapshot allows anyone to restore the virtual machine back to a pristine state in seconds.
 
