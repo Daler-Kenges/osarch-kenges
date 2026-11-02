@@ -95,7 +95,7 @@ Right-click `dev-linux-test`, select **Settings**, go to **Network** > **Adapter
 
 *Why these settings:* Setting the adapter to `NatNetwork` connects the Linux virtual machine's virtual network interface (`enp0s3`) directly to our shared virtual switch (`10.0.2.0/24`). This enables the guest to automatically receive an IP address via DHCP, route outbound traffic to the internet, and communicate directly with the Windows VM without exposing either machine to the physical office LAN.
 
-> **Check:** Click **Advanced** and verify that the **Cable Connected** box is checked.
+> **Check:** Click **Expert** and verify that the **Virtual Cable Connected** box is checked.
 
 ### Step 9. Install Ubuntu Server OS
 
