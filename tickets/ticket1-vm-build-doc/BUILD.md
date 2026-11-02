@@ -265,7 +265,12 @@ ping -n 4 8.8.8.8
 
 Copy all four terminal outputs into `evidence/05-ping-between-guests.txt`.
 
-```
+Save the terminal outputs into the evidence artifact:
+> Reference artifact: [`evidence/05-ping-between-guests.txt`](evidence/05-ping-between-guests.txt)
+
+The successful test results should look similar to the following terminal output:
+
+```text
 ======================================================================
 1. UBUNTU (dev-linux-test) -> PUBLIC INTERNET GATEWAY (8.8.8.8)
 ======================================================================
