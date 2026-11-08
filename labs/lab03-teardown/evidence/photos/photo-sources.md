@@ -1,7 +1,7 @@
-[AMD Ryzen 5 7600.png] — (https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html)
+[AMD Ryzen 5 7600.png] — (https://www.techpowerup.com/review/amd-ryzen-5-7600-non-x/4.html))
 (AMD does not publish a bare-chip photo; spec confirmed via https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html)
 
-[Intel Core i5 13400.png] — (https://www.intel.com/content/www/us/en/products/sku/230494/intel-core-i5-13400-processor-20m-cache-up-to-4-60-ghz/specifications.html)
+[Intel Core i5 13400.png] — (https://shop.kz/offer/protsessor-intel-core-i5-13400-lga1700-oem/)
 (Intel does not publish a bare-chip photo; spec confirmed via https://www.intel.com/content/www/us/en/products/sku/230494/intel-core-i5-13400-processor-20m-cache-up-to-4-60-ghz/specifications.html)
 
 [ASUS PRIME B650M-A.png] — (https://www.asus.com/motherboards-components/motherboards/prime/prime-b650m-a/)
