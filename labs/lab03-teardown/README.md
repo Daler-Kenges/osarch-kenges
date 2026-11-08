@@ -88,11 +88,17 @@ Step 3 — Motherboard table
 
 ## Part 2 — Same facts, three operating systems
 DeviceLocator        : DIMM 0
+
 Capacity             : 17179869184
+
 Speed                : 5600
+
 ConfiguredClockSpeed : 4800
+
 SMBIOSMemoryType     : 34
+
 FormFactor           : 12
+
 
 
 ## What did not work the first time
