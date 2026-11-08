@@ -1,9 +1,24 @@
-Prompt: Get-CimInstance Win32_PhysicalMemory | Select DeviceLocator, Capacity, Speed, ConfiguredClockSpeed, SMBIOSMemoryType, FormFactor
-Output:
+PS C:\Windows\System32> Get-CimInstance Win32_PhysicalMemory | Select DeviceLocator, Capacity, Speed, ConfiguredClockSpeed, SMBIOSMemoryType, FormFactor
+
 DeviceLocator        : DIMM 0
 Capacity             : 17179869184
 Speed                : 5600
 ConfiguredClockSpeed : 4800
 SMBIOSMemoryType     : 34
 FormFactor           : 12
-Use windows-specs png for confirmation of output
+
+PS C:\Windows\System32> Get-PhysicalDisk | Select FriendlyName, MediaType, BusType, Size
+
+FriendlyName MediaType BusType Size
+------------ --------- ------- ----
+KBG60ZNV512G KIOXIA SSD  NVMe    512110190592
+
+PS C:\Windows\System32> Get-Volume C
+
+DriveLetter FriendlyName FileSystemType DriveType HealthStatus OperationalStatus SizeRemaining      Size
+----------- ------------ ------------- --------- ------------ ----------------- -------------      ----
+C                        NTFS          Fixed     Healthy      OK                    117.81 GB 475.88 GB
+
+PS C:\Windows\System32> $env:PROCESSOR_ARCHITECTURE
+AMD64
+```
