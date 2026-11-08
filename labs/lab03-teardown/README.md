@@ -87,6 +87,7 @@ Step 3 — Motherboard table
 **Intel build:** a power supply (not yet chosen), a SATA power cable for the 870 EVO (the board includes only the SATA data cable), and a case.
 
 ## Part 2 — Same facts, three operating systems
+## Windows-specs:
 DeviceLocator        : DIMM 0
 
 Capacity             : 17179869184
