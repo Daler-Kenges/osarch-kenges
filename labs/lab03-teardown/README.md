@@ -88,17 +88,29 @@ Step 3 — Motherboard table
 
 ## Part 2 — Same facts, three operating systems
 ## Windows-specs:
+PS C:\Windows\System32> Get-CimInstance Win32_PhysicalMemory | Select DeviceLocator, Capacity, Speed, ConfiguredClockSpeed, SMBIOSMemoryType, FormFactor
+
 DeviceLocator        : DIMM 0
-
 Capacity             : 17179869184
-
 Speed                : 5600
-
 ConfiguredClockSpeed : 4800
-
 SMBIOSMemoryType     : 34
-
 FormFactor           : 12
+
+PS C:\Windows\System32> Get-PhysicalDisk | Select FriendlyName, MediaType, BusType, Size
+
+FriendlyName MediaType BusType Size
+------------ --------- ------- ----
+KBG60ZNV512G KIOXIA SSD  NVMe    512110190592
+
+PS C:\Windows\System32> Get-Volume C
+
+DriveLetter FriendlyName FileSystemType DriveType HealthStatus OperationalStatus SizeRemaining      Size
+----------- ------------ ------------- --------- ------------ ----------------- -------------      ----
+C                        NTFS          Fixed     Healthy      OK                    117.81 GB 475.88 GB
+
+PS C:\Windows\System32> $env:PROCESSOR_ARCHITECTURE
+AMD64
 
 
 
@@ -107,4 +119,20 @@ The lab sheet specifies Crucial DDR4-3200, 16 GB DIMM for the Intel build. Micro
 
 ## Evidence
 - evidence/windows-specs.txt — …
-- evidence/linux-specs.txt — …
+| Component | Visual Proof |
+| :--- | :--- |
+| **AMD Ryzen 5 7600** | ![AMD Ryzen 5 7600](evidence/photos/AMD%20Ryzen%205%207600.png) |
+| **AMD Wraith Stealth Cooler** | ![AMD Wraith Stealth](evidence/photos/AMD%20Wraith%20Stealth%20Processor%20Air%20Cooler.png) |
+| **ASUS PRIME B650M-A** | ![ASUS PRIME B650M-A](evidence/photos/ASUS%20PRIME%20B650M-A.png) |
+| **Intel Core i5 13400** | ![Intel Core i5 13400](evidence/photos/Intel%20Core%20i5%2013400.png) |
+| **Intel Laminar RM1** | ![Intel Laminar RM1](evidence/photos/Intel%20Laminar%20RM1.png) |
+| **Kingston FURY Beast DDR4-3200 (32GB)** | ![Kingston DDR4](evidence/photos/Kingston%20FURY%20Beast%20DDR4-3200%2C%202x16GB%20kit%20KF432C16BBK2_32.png)|
+| **Kingston FURY Beast DDR5-5600 (16GB)** | ![Kingston DDR5](evidence/photos/Kingston%20FURY%20Beast%20DDR5-5600%2C%2016%20GB%20%28KF556C40BB-16%29.png) |
+| **MSI PRO B760M-A WIFI DDR4** | ![MSI PRO B760M-A](evidence/photos/MSI%20PRO%20B760M-A%20WIFI%20DDR4.png) |
+| **Samsung 870 EVO 1 TB** | ![Samsung 870 EVO](evidence/photos/Samsung%20870%20EVO%201%20TB%20%28MZ-77E1T0OW%29.png) |
+| **Samsung 990 PRO 1 TB** | ![Samsung 990 PRO](evidence/photos/Samsung%20990%20PRO%201%20TB%20%28MZ-V9P1T0BW%29.png) |
+
+### 📄 Logs & Sources
+
+* [Photo Sources Documentation](evidence/photo-sources.md)
+* [Windows Specs Text Log](evidence/windows-specs.txt)
