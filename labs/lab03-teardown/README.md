@@ -28,7 +28,7 @@ Source: (https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memo
 DDR4 DIMM kit, 32 GB total (2x16 GB), rated 3200 MT/s CL16 under XMP Profile #1; JEDEC default is 2400 MT/s. Connects to two DDR4 slots on an LGA1700 board, running dual-channel. Limit: XMP must be enabled in BIOS to reach 3200; without it, the board defaults to 2400.
 Source: (https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr4-memory)
 ### Note: the memory kit above was used as replacement for Crucial DDR4-3200, 16 GB DIMM module. 
-Reasoning behind change is in "What went wrong" section.
+Reasoning behind change is in "What did not work the first time" section.
 
 ### SSD module
 ### Samsung 990 PRO 1 TB
@@ -51,26 +51,47 @@ Source: (https://www.intel.com/content/www/us/en/support/articles/000089627/proc
 Step 3 — Motherboard table
 | Field | ASUS PRIME B650M-A | MSI PRO B760M-A WIFI DDR4 |
 |---|---|---|
-| **Socket** |  |  |
-| **Chipset** |  |  |
-| **Memory type / slots** |  |  |
-| **Storage (M.2 / SATA)** |  |  |
-| **CPU Support list / BIOS** |  |  |
-| **Source (maker page link)** |  |  |
+| **Socket** | AM5 | LGA1700 |
+| **Chipset** | AMD B650 | Intel B760 |
+| **Memory type / slots** | DDR5, 4 DIMM slots | DDR4, 4 DIMM slots, max 128 GB |
+| **Storage (M.2 / SATA)** | 2x M.2 (PCIe 5.0 x4 + PCIe 4.0 x4), 4x SATA 6Gb/s | 2x M.2 Gen4 x4, 4x SATA 6Gb/s |
+| **CPU Support list / BIOS** | Ryzen 5 7600 confirmed on CPU Support list; minimum BIOS 0602 | i5-13400 confirmed on CPU Support list; minimum BIOS 7D99v10; latest available 7D99v1J |
+| **Source (maker page link)** | https://www.asus.com/motherboards-components/motherboards/prime/prime-b650m-a/ | https://www.msi.com/Motherboard/PRO-B760M-A-WIFI-DDR4 |
 
 ## Two builds
-### Build 1
+
+## Build A — Ryzen 5 7600
+
 | Part | Model | Why it fits here |
-### Build 2
+|---|---|---|
+| CPU | AMD Ryzen 5 7600 | Uses DDR5 memory only |
+| Motherboard | ASUS PRIME B650M-A | DDR5-only board, matches the Ryzen 5 7600's DDR5-only memory controller |
+| Memory | Kingston FURY Beast DDR5-5600 | Matches the board's DDR5 slots |
+| SSD | Samsung 990 PRO 1 TB | PCIe 4.0 NVMe, pairs with the board's PCIe 4.0 M.2 slot |
+| Cooler | AMD Wraith Stealth | Bundled with the boxed Ryzen 5 7600 |
+
+## Build B — Intel i5-13400
+
 | Part | Model | Why it fits here |
-What each build still needs: …
+|---|---|---|
+| CPU | Intel Core i5-13400 | LGA1700 socket, supports DDR4 |
+| Motherboard | MSI PRO B760M-A WIFI DDR4 | Supports the i5-13400 (CPU Support list) and takes DDR4 memory |
+| Memory | Kingston FURY Beast DDR4-3200 | Matches the board's DDR4 slots, confirmed on MSI's memory list |
+| SSD | Samsung 870 EVO 1 TB | SATA interface matches the board's SATA ports |
+| Cooler | Intel Laminar RM1 | Bundled with the boxed i5-13400 |
+
+## What each build still needs
+
+**Ryzen build:** a case. PSU already assigned (Corsair RM750e).
+
+**Intel build:** a power supply (not yet chosen), a SATA power cable for the 870 EVO (the board includes only the SATA data cable), and a case.
 
 ## Part 2 — Same facts, three operating systems
 <the table>
-<2–3 sentences: how the names differ; what the VM showed>
+
 
 ## What did not work the first time
-<at least one real thing: what you saw, what it was, what you did>
+The lab sheet specifies Crucial DDR4-3200, 16 GB DIMM for the Intel build. Micron announced on December 3, 2025 that it was discontinuing the Crucial consumer brand, with retail shipments ending in February 2026 "BOISE, Idaho, Dec. 03, 2025 (GLOBE NEWSWIRE) -- Micron Technology, Inc. (Nasdaq: MU), a leader in innovative memory and storage solutions, today announced its decision to exit the Crucial consumer business, including the sale of Crucial consumer-branded products at key retailers, e-tailers and distributors worldwide.." Since Crucial consumer memory is no longer sold, I substituted the Kingston FURY Beast DDR4-3200, 2x16GB kit (KF432C16BBK2/32), which is confirmed on MSI’s own memory support list for the PRO B760M-A WIFI DDR4 at 3200 MT/s (https://investors.micron.com/news/press-release/2025/Micron-Announces-Exit-from-Crucial-Consumer-Business-12-03-2025/default.aspx). This also fixes the single-module problem in the original sheet — two 16 GB modules give dual-channel operation, which one 16 GB stick would not.
 
 ## Evidence
 - evidence/windows-specs.txt — …
