@@ -1,6 +1,6 @@
 # Lab 3 — Teardown, and the same machine from the command line
 
-Pair: <name> + <name> · Date: <date>
+Pair: Daler (solo work) · Date: 8.11.2026
 
 ## Part 1 — Ten parts
 ### Processors:
