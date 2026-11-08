@@ -14,6 +14,6 @@
 
 [Samsung 870 EVO 1 TB (MZ-77E1T0BW).png] — https://www.samsung.com/kz_ru/memory-storage/sata-ssd/870-evo-1tb-sata-3-2-5-ssd-mz-77e1t0bw/
 
-[AMD Wraith Stealth Cooler (no LED).png] — (https://www.multitronic.fi/en/products/2634624)
+[AMD Wraith Stealth Processor Air Cooler.png] — (https://www.multitronic.fi/en/products/2634624)
 
 [Intel Laminar RM1.png] — (https://www.intel.com/content/www/us/en/support/articles/000089190/processors/intel-core-processors.html)
