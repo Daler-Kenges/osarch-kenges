@@ -1,1 +1,9 @@
-
+Prompt: Get-CimInstance Win32_PhysicalMemory | Select DeviceLocator, Capacity, Speed, ConfiguredClockSpeed, SMBIOSMemoryType, FormFactor
+Output:
+DeviceLocator        : DIMM 0
+Capacity             : 17179869184
+Speed                : 5600
+ConfiguredClockSpeed : 4800
+SMBIOSMemoryType     : 34
+FormFactor           : 12
+Use windows-specs png for confirmation of output
