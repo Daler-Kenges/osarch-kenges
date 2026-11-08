@@ -8,7 +8,7 @@
 
 [Kingston FURY Beast DDR4-3200, 2x16GB kit KF432C16BBK2_32.png] — (https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr4-memory)
 
-[Kingston FURY Beast DDR5-5600, 16 GB (KF556C40BB-16).png] — (https://www.kingston.com/ru/memory/gam[ing/kingston-fury-beast-ddr5-memory)
+[Kingston FURY Beast DDR5-5600, 16 GB (KF556C40BB-16).png] — (https://www.kingston.com/ru/memory/gaming/kingston-fury-beast-ddr5-memory)
 
 [Samsung 990 PRO 1 TB (MZ-V9P1T0BW).png] — (https://www.samsung.com/sg/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/)
 
