@@ -34,6 +34,25 @@ I choose GPT because Windows boots with UEFI, which uses GPT that stores a backu
 <lsblk before>
 ### After
 <lsblk after: md0 on sdb1 and sdd1, mounted on /mnt/mirror>
+NAME                       SIZE TYPE  FSTYPE            MOUNTPOINTS
+loop0                     66.8M loop  squashfs          /snap/core24/1643
+loop1                      1.5M loop  squashfs          /snap/hwctl/123
+loop2                      1.5M loop  squashfs          /snap/hwctl/131
+loop3                     50.1M loop  squashfs          /snap/snapd/27710
+sda                         25G disk
+├─sda1                       1M part
+├─sda2                       2G part  ext4              /boot
+└─sda3                      23G part  LVM2_member
+  └─ubuntu--vg-ubuntu--lv 11.5G lvm   ext4              /
+sdb                          1G disk
+└─sdb1                    1022M part  linux_raid_member
+  └─md0                   1021M raid1 ext4              /mnt/mirror
+sdc                          1G disk
+└─sdc1                    1022M part  linux_raid_member
+sdd                          1G disk
+└─sdd1                    1022M part  linux_raid_member
+  └─md0                   1021M raid1 ext4              /mnt/mirror
+sr0                       50.7M rom   iso9660
 
 ## What I did
 <the commands, in order, in code blocks — create, fail, rebuild>
