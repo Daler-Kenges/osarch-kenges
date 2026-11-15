@@ -130,3 +130,11 @@ No, RAID 1 does not help in this situation. RAID 1 mirrors every filesystem oper
 1. **Pasting commands into the VirtualBox VM console:** Initially, I tried pasting multi-line commands directly into the Ubuntu VirtualBox GUI window, which did not accept clipboard paste from the Windows host without Guest Additions configured. Switching to an SSH session from Windows PowerShell (`ssh -p 2222 kenges@127.0.0.1`) enabled full copy-and-paste support in both directions and made capturing unedited command outputs much cleaner.
 2. **Transferring evidence files with `scp`:** When copying the evidence folder from the guest VM to the host using `scp -P 2222 -r kenges@127.0.0.1:lab04/evidence labs/lab04-storage/`, the transfer failed with `No such file or directory`. PowerShell was running in `C:\Users\...` rather than the root directory of the cloned Git repository, so the relative destination path `labs/lab04-storage/` did not exist there; copying to `$HOME\Desktop\evidence` (or navigating into the repository root first) resolved the issue.o the host using `scp -P 2222 -r kenges@127.0.0.1:lab04/evidence labs/lab04-storage/`, the transfer failed with `No such file or directory`. PowerShell was running in `C:\Users\...` rather than the root directory of the cloned Git repository, so the relative destination path `labs/lab04-storage/` did not exist there; copying to `$HOME\Desktop\evidence` (or navigating into the repository root first) resolved the issue.
 
+## AI Usage Acknowledgment
+In completing this lab, I consulted Google's Gemini as a troubleshooting and documentation assistant. Gemini helped by:
+* Formatting my raw terminal outputs (`lsblk`, `mdadm`, `Get-Disk`) into proper Markdown code blocks.
+* Breaking down the underlying concepts behind GPT partitions, SHA-256 hashing, and the `initramfs` rebuild process.
+* Troubleshooting the `scp` relative path errors and suggesting the Windows PowerShell SSH workflow to bypass VirtualBox clipboard limitations.
+* Verifying that my final evidence files matched the expected technical criteria for a successful RAID-1 rebuild.
+
+All commands were executed manually by me in the VirtualBox environment, and the captured evidence reflects my genuine lab outputs.
