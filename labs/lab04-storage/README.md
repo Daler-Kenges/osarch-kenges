@@ -26,7 +26,8 @@ Size           : 1073741824
 
 E           LAB04        NTFS           Fixed     Healthy      OK                    989.98 MB 1007.93 MB
 
-MBR or GPT: <which, and why — one or two sentences>
+MBR or GPT: 
+I choose GPT because Windows boots with UEFI, which uses GPT that stores a backup copy of the table and checksums it. MBR with restrictions to 2TiB and 4 channels would cause significant complexities like sacrificing primary slot for extension. GPT removes extra complexities, providing error management via checksumming the table and storing back up.
 
 ## Linux — layout before and after
 ### Before
