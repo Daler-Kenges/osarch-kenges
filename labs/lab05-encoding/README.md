@@ -40,3 +40,31 @@ printf '\357\273\277' | cat - "$out" > tmp && mv tmp "$out"
 
 ## What did not work the first time
 Testing WINDOWS-1251 before RK1048: Running iconv -f WINDOWS-1251 -t UTF-8 decoded Russian names properly but corrupted Kazakh letters (turning Әбдірахманова into Јбдірахманова, Қасымов into Ќасымов, and Нұрлан into Нўрлан). Checking the raw hex bytes (0xa3 for Ә) and switching the source encoding to RK1048 (KZ-1048) resolved every character cleanly.
+
+## Artifacts & Evidence Index
+
+### Data & Scripts
+- **Original broken CSV:** [`evidence/staff-broken.csv`](evidence/staff-broken.csv)
+- **Fixed UTF-8 CSV (with BOM & LF):** [`evidence/staff-fixed.csv`](evidence/staff-fixed.csv)
+- **Conversion script:** [`scripts/fix.sh`](scripts/fix.sh)
+
+### Forensic Logs
+- **Pre-fix `file` output:** [`evidence/file-before.txt`](evidence/file-before.txt)
+- **Pre-fix hex dump (`xxd`):** [`evidence/hexdump-before.txt`](evidence/hexdump-before.txt)
+- **Post-fix `file` & hex verification:** [`evidence/file-after.txt`](evidence/file-after.txt)
+
+### Visual Verification
+- **Before — Microsoft Excel:** [`evidence/before-excel.png`](evidence/before-excel.png)
+- **Before — LibreOffice Calc:** [`evidence/before-libreoffice.png`](evidence/before-libreoffice.png)
+- **Before — PowerShell (`cat`):** [`evidence/before-powershell.png`](evidence/before-powershell.png)
+- **After — Side-by-side verification (Ubuntu terminal, Excel & LibreOffice Calc):** [`evidence/opens-correctly.png`](evidence/opens-correctly.png)
+
+---
+## AI Usage
+- **Tool:** Google Gemini
+- **How it was used:**
+  - Guided environment setup and repository organization (`git clone`, directory structuring, and pushing local Ubuntu artifacts to GitHub).
+  - Helped interpret the `file` output and `xxd` hexadecimal byte offsets (`49 44`, `0d 0a`, `a3`, `b3`, and `ef bb bf`) to confirm `KZ-1048` (`RK1048`) encoding, `CRLF` line endings, and missing BOM.
+  - Assisted in writing and verifying the POSIX shell conversion script (`scripts/fix.sh`) using `iconv`, `sed`, and `printf`.
+  - Helped structure and refine the final `README.md` documentation and evidence index.
+- **Verification:** Every command, byte offset, and converted CSV output (`staff-fixed.csv`) was executed and verified directly by me in Ubuntu, PowerShell, Microsoft Excel, and LibreOffice Calc.
