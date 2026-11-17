@@ -2,7 +2,7 @@
 
 Name: Daler Kenges · Date: 17.11.2026 · Tools: Ubuntu guest controlled via PowerShell
 ```
-Note: Although some screenshots related to the Ubuntu guest are labeled as PowerShell, those are the output of the Ubuntu guest, copy-paste operations with which went inside PowerShell, which I used to access Ubuntu with SSH command "ssh -p 2222 kenges@127.0.0.1", because setting copy-paste inside Ubuntu VM rendered significant amount of obstructions that would eventually force me to write everything manually. I tried Bi-directional Clipboard and inserting guest additions, but PowerShell offered significantly more comfort with copy-pasting for less frictions, which is the main reason I prefer this method. However, the Ubuntu VM was still running to make the whole procedure work
+Note: Although some screenshots related to the Ubuntu guest are labeled as PowerShell, those are the output of the Ubuntu guest, copy-paste operations with which went inside PowerShell, which I used to access Ubuntu with SSH command "ssh -p XXXX username+VM-ip", because setting copy-paste inside Ubuntu VM rendered significant amount of obstructions that would eventually force me to write everything manually. I tried Bi-directional Clipboard and inserting guest additions, but PowerShell offered significantly more comfort with copy-pasting for less frictions, which is the main reason I prefer this method. However, the Ubuntu VM was still running to make the whole procedure work
 ```
 ## What I received
 ![Excel before](evidence/before-excel.png)
