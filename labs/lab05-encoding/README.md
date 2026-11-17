@@ -68,7 +68,7 @@ Testing WINDOWS-1251 before RK1048: Running iconv -f WINDOWS-1251 -t UTF-8 decod
 
 ---
 ## AI Usage
-- **Tool:** Google Gemini
+- **Tool:** Google Gemini (model: 4 Hydrogen)
 - **How it was used:**
   - Guided environment setup and repository organization (`git clone`, directory structuring, and pushing local Ubuntu artifacts to GitHub).
   - Helped interpret the `file` output and `xxd` hexadecimal byte offsets (`49 44`, `0d 0a`, `a3`, `b3`, and `ef bb bf`) to confirm `KZ-1048` (`RK1048`) encoding, `CRLF` line endings, and missing BOM.
