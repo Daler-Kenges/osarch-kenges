@@ -48,7 +48,7 @@ evidence/opens-correctly.png: Confirms staff-fixed.csv displays all Russian and 
 ## What did not work the first time
 Testing WINDOWS-1251 before RK1048: Running iconv -f WINDOWS-1251 -t UTF-8 decoded Russian names properly but corrupted Kazakh letters (turning Әбдірахманова into Јбдірахманова, Қасымов into Ќасымов, and Нұрлан into Нўрлан). Checking the raw hex bytes (0xa3 for Ә) and switching the source encoding to RK1048 (KZ-1048) resolved every character cleanly.
 
-## Artifacts & Evidence Index
+## Evidences (& Artifacts)
 
 ### Data & Scripts
 - **Original broken CSV:** [`evidence/staff-broken.csv`](evidence/staff-broken.csv)
