@@ -38,6 +38,11 @@ sed -i 's/\r$//' "$out"
 printf '\357\273\277' | cat - "$out" > tmp && mv tmp "$out"
 ```
 
+## Verification
+evidence/file-after.txt: file reports Unicode text, UTF-8 (with BOM) text (with no CRLF mention, confirming LF line endings), and xxd confirms the file starts with ef bb bf 49 44 3b (UTF-8 BOM + ID;) followed by two-byte d0/d1 UTF-8 Cyrillic sequences.
+
+evidence/opens-correctly.png: Confirms staff-fixed.csv displays all Russian and Kazakh names (Әбдірахманова, Қасымов, Нұрлан) accurately and cleanly split into columns across Linux cat, Microsoft Excel (by double-click), and LibreOffice Calc.
+
 ## What did not work the first time
 Testing WINDOWS-1251 before RK1048: Running iconv -f WINDOWS-1251 -t UTF-8 decoded Russian names properly but corrupted Kazakh letters (turning Әбдірахманова into Јбдірахманова, Қасымов into Ќасымов, and Нұрлан into Нўрлан). Checking the raw hex bytes (0xa3 for Ә) and switching the source encoding to RK1048 (KZ-1048) resolved every character cleanly.
 
