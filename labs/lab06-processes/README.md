@@ -29,18 +29,15 @@ lrwx------  1 root root 64 Nov 22 17:51 3 -> /dev/vboxguest
 lrwx------+ 1 root root 64 Nov 22 17:51 4 -> socket:[64595]
 ```
 
-### Comparison table
-
-| Metric | Task Manager | Process Explorer | htop / ps |
-| :--- | :--- | :--- | :--- |
-| **PID** | `1708` | `1708` | `23405` |
-| **Parent (name and PID)** | — (not shown) | `services.exe` (`816`) | `systemd` (`1`) |
-| **"Memory" as shown by default** | `1,096 K` (Memory - private working set) | `2,424 K` (Private Bytes) / `9,384 K` (Working Set) | `3,800` KiB (`RES` in `htop`) / `3,804` KiB (`RSS` in `ps`) |
-| **Private memory** | `1,096 K` (Memory - private working set) | `1,100 K` (WS Private) / `2,424 K` (Private Bytes) | `420` KiB (`RES - SHR`: `3804 - 3384` KiB; no dedicated column) |
-| **Working set / RES** | `9,328 K` (Working set) | `9,384 K` (Working Set) | `3,800` KiB (`RES`) / `3,804` KiB (`RSS`) |
-| **Virtual size** | `2,368 K` (Commit size) | `2,424 K` (Private Bytes) | `285M` (`VIRT`) / `292,100` KiB (`VSZ`) |
-| **Handles / file descriptors** | `194` | `196` | `5` (`/proc/23405/fd`) |
-| **Threads** | `14` | `14` | `9` (`NLWP` in `ps`; 1 main + 8 worker threads in `htop`) |
+Metric,Task Manager,Process Explorer,htop / ps
+PID,1708,1708,23405
+Parent (name and PID),— (not shown),services.exe (816),systemd (1)
+"""Memory"" as shown by default","1,096 K (Memory - private working set)","2,424 K (Private Bytes) / 9,384 K (Working Set)","3,800 KiB (RES in htop) / 3,804 KiB (RSS in ps)"
+Private memory,"1,096 K (Memory - private working set)","1,100 K (WS Private) / 2,424 K (Private Bytes)",420 KiB (RES - SHR: 3804 - 3384 KiB; no dedicated column)
+Working set / RES,"9,328 K (Working set)","9,384 K (Working Set)","3,800 KiB (RES) / 3,804 KiB (RSS)"
+Virtual size,"2,368 K (Commit size)","2,424 K (Private Bytes)","285M (VIRT) / 292,100 KiB (VSZ)"
+Handles / file descriptors,194,196,5 (/proc/23405/fd)
+Threads,14,14,9 (NLWP in ps; 1 main + 8 worker threads in htop)
 
 ### Where the tools disagree
 
