@@ -99,3 +99,14 @@ The Windows guest has not experienced a virtual memory exhaustion condition duri
 * **`stress-ng` percentages (`70%`–`280%`) did not trigger an OOM kill:** `stress-ng` calculates `--vm-bytes` relative to *available RAM* (`~1.0–1.2 GiB`) rather than combined RAM + swap (`3.6 GiB`), so `/swap.img` (`2.0 GiB`) absorbed the allocations without exhausting total commit capacity.
 * **Oversized `--vm-bytes` (`480%`–`520%`, `6.10 GB` single virtual request) was rejected before faulting pages:** Linux's default `vm.overcommit_memory=0` heuristic throttled/refused the single oversized virtual request instead of letting it fault physical pages until exhaustion.
 * **Switching to incremental 100 MB allocations solved it:** Allocating and zero-filling 100 MB `bytearray` chunks in Python (`python3 -c 'a = []; [a.append(bytearray(100 * 1024 * 1024)) for _ in range(100)]'`) forced actual physical page faults step by step until both RAM and `/swap.img` filled completely and triggered the kernel OOM killer.
+
+---
+
+## AI Usage
+
+* **Tool Used:** Google Gemini (4 Hydrogen) 
+* **Scope of Contribution:**
+  * Assisted in troubleshooting why initial `stress-ng` runs did not trigger the Linux OOM killer (explaining `vm.overcommit_memory=0` heuristics and `stress-ng`'s available-RAM percentage calculation) and suggested the incremental 100 MB Python `bytearray` allocator to reproduce genuine physical memory and swap exhaustion.
+  * Helped interpret kernel `journalctl -k` OOM killer log fields (`total-vm`, `anon-rss`, swap pages) and Windows `Get-WinEvent` (`Microsoft-Windows-Resource-Exhaustion-Detector` / Event ID `2004`) behavior.
+  * Assisted with formatting the Markdown comparison tables, structuring the `README.md` report, and verifying the `labs/lab06-processes/` repository layout.
+* **Student Verification:** All VM experiments, screenshots (`task-manager.png`, `process-explorer.png`, `htop.png`, `event-viewer-log.png`), system commands, and log captures (`memory-pressure.txt`, `kernel-log-extract.txt`) were executed, collected, and verified directly on the student's Ubuntu and Windows VirtualBox guests.
