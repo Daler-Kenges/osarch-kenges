@@ -1,0 +1,33 @@
+Nov 22 18:19:05 lab01-kenges kernel: workqueue: blk_mq_run_work_fn hogged CPU for >10000us 67 times, consider switching to WQ_UNBOUND
+Nov 22 18:21:21 lab01-kenges kernel: workqueue: drm_fb_helper_damage_work hogged CPU for >10000us 67 times, consider switching to WQ_UNBOUND
+Nov 22 18:21:23 lab01-kenges systemd-journald[548]: Under memory pressure, flushing caches.
+Nov 22 18:21:29 lab01-kenges kernel: sshd-session invoked oom-killer: gfp_mask=0x140cca(GFP_HIGHUSER_MOVABLE|__GFP_COMP), order=0, oom_score_adj=0
+Nov 22 18:21:29 lab01-kenges kernel: CPU: 1 UID: 1000 PID: 1528 Comm: sshd-session Tainted: G             L      7.0.0-43-generic #43-Ubuntu PREEMPT(lazy)
+Nov 22 18:21:29 lab01-kenges kernel: Tainted: [L]=SOFTLOCKUP
+Nov 22 18:21:29 lab01-kenges kernel: Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+Nov 22 18:21:29 lab01-kenges kernel: Call Trace:
+Nov 22 18:21:29 lab01-kenges kernel:  <TASK>
+Nov 22 18:21:29 lab01-kenges kernel:  show_stack+0x49/0x60
+Nov 22 18:21:29 lab01-kenges kernel:  dump_stack_lvl+0x5f/0x90
+Nov 22 18:21:29 lab01-kenges kernel:  dump_stack+0x10/0x18
+--
+Nov 22 18:21:29 lab01-kenges kernel: [   1528]  1000  1528     4672      722      328      394         0    86016      223             0 sshd-session
+Nov 22 18:21:29 lab01-kenges kernel: [   1529]  1000  1529     2244      539        0      539         0    57344      453             0 bash
+Nov 22 18:21:29 lab01-kenges kernel: [   2341]  1000  2341   900708   362856   362267      589         0  7061504   509385             0 python3
+Nov 22 18:21:29 lab01-kenges kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/session-3.scope,task=python3,pid=2341,uid=1000
+Nov 22 18:21:29 lab01-kenges kernel: Out of memory: Killed process 2341 (python3) total-vm:3602832kB, anon-rss:1449068kB, file-rss:2356kB, shmem-rss:0kB, UID:1000 pgtables:6896kB oom_score_adj:0
+Nov 22 18:22:07 lab01-kenges kernel: python3 invoked oom-killer: gfp_mask=0x140dca(GFP_HIGHUSER_MOVABLE|__GFP_ZERO|__GFP_COMP), order=0, oom_score_adj=0
+Nov 22 18:22:07 lab01-kenges kernel: CPU: 0 UID: 1000 PID: 2354 Comm: python3 Tainted: G             L      7.0.0-43-generic #43-Ubuntu PREEMPT(lazy)
+Nov 22 18:22:07 lab01-kenges kernel: Tainted: [L]=SOFTLOCKUP
+Nov 22 18:22:07 lab01-kenges kernel: Hardware name: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+Nov 22 18:22:07 lab01-kenges kernel: Call Trace:
+Nov 22 18:22:07 lab01-kenges kernel:  <TASK>
+Nov 22 18:22:07 lab01-kenges kernel:  show_stack+0x49/0x60
+Nov 22 18:22:07 lab01-kenges kernel:  dump_stack_lvl+0x5f/0x90
+Nov 22 18:22:07 lab01-kenges kernel:  dump_stack+0x10/0x18
+--
+Nov 22 18:22:07 lab01-kenges kernel: [   1528]  1000  1528     4672      698      304      394         0    86016      247             0 sshd-session
+Nov 22 18:22:07 lab01-kenges kernel: [   1529]  1000  1529     2244      539        0      539         0    57344      453             0 bash
+Nov 22 18:22:07 lab01-kenges kernel: [   2354]  1000  2354   900708   364105   363514      591         0  7061504   508113             0 python3
+Nov 22 18:22:07 lab01-kenges kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/session-3.scope,task=python3,pid=2354,uid=1000
+Nov 22 18:22:07 lab01-kenges kernel: Out of memory: Killed process 2354 (python3) total-vm:3602832kB, anon-rss:1454056kB, file-rss:2364kB, shmem-rss:0kB, UID:1000 pgtables:6896kB oom_score_adj:0
