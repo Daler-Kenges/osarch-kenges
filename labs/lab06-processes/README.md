@@ -1,6 +1,6 @@
 # Lab 6 — Live processes and memory pressure
 
-Pair: Daler Kenges (single-student work) · Date: 22.11.2026 · Guests: <Ubuntu version / Windows edition, RAM of each>
+Pair: Daler Kenges (single-student work) · Date: 22.11.2026 · Guests: Ubuntu 26.04.1 LTS 1.6Gi (2GB) RAM, Microsoft Windows 11 Enterprise Evaluation 10 GB RAM (Booted from hypervisor Oracle Virtual Box 7.2.22)
 
 ## Part 1 — Cross-tool process analysis
 
@@ -29,22 +29,25 @@ lrwx------  1 root root 64 Nov 22 17:51 3 -> /dev/vboxguest
 lrwx------+ 1 root root 64 Nov 22 17:51 4 -> socket:[64595]
 ```
 
-Metric,Task Manager,Process Explorer,htop / ps
-PID,1708,1708,23405
-Parent (name and PID),— (not shown),services.exe (816),systemd (1)
-"""Memory"" as shown by default","1,096 K (Memory - private working set)","2,424 K (Private Bytes) / 9,384 K (Working Set)","3,800 KiB (RES in htop) / 3,804 KiB (RSS in ps)"
-Private memory,"1,096 K (Memory - private working set)","1,100 K (WS Private) / 2,424 K (Private Bytes)",420 KiB (RES - SHR: 3804 - 3384 KiB; no dedicated column)
-Working set / RES,"9,328 K (Working set)","9,384 K (Working Set)","3,800 KiB (RES) / 3,804 KiB (RSS)"
-Virtual size,"2,368 K (Commit size)","2,424 K (Private Bytes)","285M (VIRT) / 292,100 KiB (VSZ)"
-Handles / file descriptors,194,196,5 (/proc/23405/fd)
-Threads,14,14,9 (NLWP in ps; 1 main + 8 worker threads in htop)
+### Comparison table
+
+| Metric | Task Manager | Process Explorer | htop / ps |
+| :--- | :--- | :--- | :--- |
+| **PID** | `1708` | `1708` | `23405` |
+| **Parent (name and PID)** | — (not shown) | `services.exe` (`816`) | `systemd` (`1`) |
+| **"Memory" as shown by default** | `1,096 K` (Memory - private working set) | `2,424 K` (Private Bytes) / `9,384 K` (Working Set) | `3,800` KiB (`RES` in `htop`) / `3,804` KiB (`RSS` in `ps`) |
+| **Private memory** | `1,096 K` (Memory - private working set) | `1,100 K` (WS Private) / `2,424 K` (Private Bytes) | `420` KiB (`RES - SHR`: `3804 - 3384` KiB; no dedicated column) |
+| **Working set / RES** | `9,328 K` (Working set) | `9,384 K` (Working Set) | `3,800` KiB (`RES`) / `3,804` KiB (`RSS`) |
+| **Virtual size** | `2,368 K` (Commit size) | `2,424 K` (Private Bytes) | `285M` (`VIRT`) / `292,100` KiB (`VSZ`) |
+| **Handles / file descriptors** | `194` | `196` | `5` (`/proc/23405/fd`) |
+| **Threads** | `14` | `14` | `9` (`NLWP` in `ps`; 1 main + 8 worker threads in `htop`) |
 
 ### Where the tools disagree
+Default "Memory" measures different footprints: Task Manager's default Memory column displays only the private working set (1,096 K — physical RAM exclusive to VBoxService.exe), whereas htop's RES (3,800 KiB) and Process Explorer's Working Set (9,384 K) include shared DLLs/libraries (SHR is 3,384 KiB on Ubuntu, meaning ~89% of its resident footprint is shared code).
 
-1. **Default "Memory" measures different footprints:** Task Manager's default **Memory** column displays only the **private working set** (`1,096 K` — physical RAM exclusive to `VBoxService.exe`), whereas `htop`'s **RES** (`3,800` KiB) and Process Explorer's **Working Set** (`9,384 K`) include shared DLLs/libraries (`SHR` is `3,384` KiB on Ubuntu, meaning ~89% of its resident footprint is shared code).
-2. **Virtual Size (`VIRT`/`VSZ`) vs. Windows Commit Size / Private Bytes:** On Linux, `htop` (`VIRT`: `285M`) and `ps` (`VSZ`: `292,100` KiB) count the entire reserved virtual address space—including mapped shared libraries and per-thread stacks across `9` threads—even though only `3.8 MiB` is backed by physical RAM. On Windows, Task Manager's **Commit size** (`2,368 K`) and Process Explorer's **Private Bytes** (`2,424 K`) count only private virtual memory committed to RAM or the pagefile.
-3. **Parent Process Visibility:** Task Manager's `Details` tab omits parent process information, whereas Process Explorer displays the process hierarchy under `services.exe` (`816`) and `htop`/`ps` expose `PPID` (`1`, `systemd`).
+Virtual Size (VIRT/VSZ) vs. Windows Commit Size / Private Bytes: On Linux, htop (VIRT: 285M) and ps (VSZ: 292,100 KiB) count the entire reserved virtual address space—including mapped shared libraries and per-thread stacks across 9 threads—even though only 3.8 MiB is backed by physical RAM. On Windows, Task Manager's Commit size (2,368 K) and Process Explorer's Private Bytes (2,424 K) count only private virtual memory committed to RAM or the pagefile.
 
+Parent Process Visibility: Task Manager's Details tab omits parent process information, whereas Process Explorer displays the process hierarchy under services.exe (816) and htop/ps expose PPID (1, systemd).
 ---
 
 ## Part 2 — Memory pressure
@@ -81,6 +84,8 @@ Nov 22 18:21:29 lab01-kenges kernel: Out of memory: Killed process 2341 (python3
 At `18:21:23`, `systemd-journald` flushed caches under memory pressure. Six seconds later (`18:21:29`), with `python3` (PID `2341`, started via `python3 -c 'a = []; [a.append(bytearray(100 * 1024 * 1024)) for _ in range(100)]'`) holding `3,602,832 kB` (`~3.44 GiB`) of virtual memory, `1,449,068 kB` (`~1.38 GiB`) of physical anonymous RSS, and `509,385` swap pages (`~1.99 GiB` of the `2.0 GiB` swap file), no reclaimable pages remained; the kernel invoked `oom-killer`, selected `python3` as the highest memory consumer, and terminated it with `SIGKILL` to protect system stability.
 
 ### Windows
+
+## Evidence: evidence/event-viewer-log.png
 
 ```powershell
 PS C:\Users\Daler> Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Resource-Exhaustion-Detector'} -MaxEvents 5 | Format-List TimeCreated, Id, Message
