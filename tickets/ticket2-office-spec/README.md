@@ -59,7 +59,7 @@ Full component reasoning is in [builds.md](builds.md), and the itemized UTF-8 le
 ### Answers to the Director's Three Questions
 
 1. **Which of the four machines will you upgrade first, eighteen months from now, and why?**  
-   The **Designer's workstation** will be upgraded first by adding a second **16 GB DDR5 memory module** (bringing it from 16 GB to **32 GB**). To keep the initial build under the 3,000,000 KZT ceiling while funding the `188,750 KZT` ASUS ProArt monitor and `289,590 KZT` RTX 3060 GPU, the designer starts on 16 GB in single-channel mode; as multi-layer Photoshop PSDs, Illustrator artboards, and browser reference tabs grow over 18 months, 16 GB will hit disk swap first, and the MSI PRO B650M-P has three open DIMM slots ready for a drop-in upgrade.
+   The **Sales Manager's workstation** will be upgraded first by adding an extra **16 GB AMD Radeon R5 DDR5-5200 stick** into the open slot on the MSI PRO A620M-E motherboard (or replacing it with a matched **2×16 GB DDR5-5600 dual-channel kit**). Because the Sales Manager runs 30–40 browser tabs, cloud CRM, Excel, and daily video calls simultaneously, the current single-stick 16 GB configuration restricts both total capacity and **memory bandwidth** in single-channel mode—unlocking **dual-channel mode** at 32 GB removes that bottleneck immediately without touching the CPU or motherboard.
 
 2. **Price the same four as pre-built machines from a vendor. What does the company gain and lose by not building them?**  
    Comparable off-the-shelf towers priced on `2026-11-24` (recorded in [budget.csv](budget.csv), rows 45–49) cost **`2,082,320 KZT` for the towers alone**, and **`2,605,760 KZT`** once you add the missing monitors, three Windows 11 Home licenses, and developer keyboard/mouse:
@@ -67,39 +67,42 @@ Full component reasoning is in [builds.md](builds.md), and the itemized UTF-8 le
    * *Sales pre-built:* **MSI PRO DP180 AI** (`352,050 KZT`, DNS) — uses an entry Intel H810 board, **512 GB SSD**, and no OS.
    * *Web Developer pre-built:* **DEXP Mars G021** (`578,590 KZT`, DNS) — Ryzen 7 8700G, 32 GB DDR5, 1 TB SSD, B650, no OS.
    * *Designer pre-built:* **ARDOR GAMING NEO M256** (`611,690 KZT`, DNS) — Ryzen 5 7500F, 16 GB DDR5, 1 TB SSD, RTX 5060 8 GB, 500W PSU, no OS.  
-   By buying pre-builts, the company **gains** a single-vendor system warranty, faster Day-1 deployment without assembly labor, and centralized store support. It **loses** component-level control (getting 512 GB SSDs instead of 1 TB on two desks, lower-tier PSUs/motherboards, and 8 GB VRAM instead of 12 GB on the designer's GPU) and sacrifices clean per-part upgrade paths.
+   By buying pre-builts, the company **gains** a single-vendor warranty, zero assembly time, and store-level tech support, and some pre-built SKUs pack stronger raw CPUs/GPUs on paper. However, the company **loses** part-level control and still pays extra to match our office requirements: pre-installed single-stick/OEM memory kits often lack **dual-channel bandwidth**, lower speeds, or matched upgrade compatibility (forcing us to discard or ignore the pre-integrated sticks when upgrading), two units fall short on storage (512 GB vs. 1 TB), and OS/monitor extras drive the true all-in cost right back up.
 
 3. **One of these four people will complain about performance within a month. Which one, and about what?**  
-   The **Sales Manager** will inevitably complain within a month—specifically about **background browser tabs reloading and brief audio/video stutters during screen-sharing calls** when 35–40 Chrome tabs, CRM dashboards, and Excel sheets are open at once on **16 GB of RAM**. Because high DDR5 kit prices (`282,990 KZT` for 32 GB vs. `122,990 KZT` for 16 GB) forced the Sales build down to a single 16 GB stick to keep the office under 3,000,000 KZT, Windows will compress memory and swap idle tabs to the NVMe SSD during heavy multitasking. *(A close second is the **Accountant** or **Developer** complaining about neck/eye strain from the fixed-stand 23.8" 1080p monitors during 8-hour spreadsheet and coding sessions.)*
+   The **Sales Manager** will not be too enthusiastic about the **tight memory headroom** within the first month—specifically complaining about **background Chrome tabs reloading, sluggish switching between CRM and Excel, and brief stutters during screen-sharing calls** when 35–40 tabs are open at once. Because high DDR5 prices (`282,990 KZT` for 32 GB vs. `122,990 KZT` for 16 GB) forced the Sales build down to a single 16 GB stick to stay within the 3,000,000 KZT ceiling, Windows has very little free RAM headroom and begins compressing memory and swapping idle tabs to the NVMe SSD during peak multitasking.
 
 ---
 
 ## 4. Evidence
 
 * [evidence/pcpartpicker-links.md](evidence/pcpartpicker-links.md) — Verified socket, DDR5, M.2, and wattage compatibility lists for all four builds on PCPartPicker.
-* `evidence/vendor-quotes/shared-cpu-r5.jpg` — Kaspi.kz quote (`2026-11-24`) for AMD Ryzen 5 7600 BOX (`115,304 KZT`, Accountant/Sales/Designer).
-* `evidence/vendor-quotes/dev-cpu.jpg` — Shop.kz quote (`2026-11-24`) for AMD Ryzen 7 7700 OEM (`100,990 KZT`, Developer).
-* `evidence/vendor-quotes/dev-cooler.jpg` — Kaspi.kz quote (`2026-11-24`) for DeepCool AG400 cooler (`14,606 KZT`, Developer).
-* `evidence/vendor-quotes/shared-mobo-a620.jpg` — Kaspi.kz quote (`2026-11-24`) for MSI PRO A620M-E (`99,997 KZT`, Accountant/Sales).
-* `evidence/vendor-quotes/shared-mobo-b650.jpg` — Kaspi.kz quote (`2026-11-24`) for MSI PRO B650M-P (`109,999 KZT`, Developer/Designer).
-* `evidence/vendor-quotes/accountant-memory.jpg` — Shop.kz quote (`2026-11-24`) for AMD Radeon R5 16 GB DDR5-5200 (`122,990 KZT`, Accountant/Sales/Designer).
-* `evidence/vendor-quotes/shared-memory-32gb.jpg` — Shop.kz quote (`2026-11-24`) for AMD Radeon R5 32 GB (2×16 GB) DDR5-5600 (`282,990 KZT`, Developer).
-* `evidence/vendor-quotes/shared-ssd.jpg` — Shop.kz quote (`2026-11-24`) for Kingston NV3 1 TB M.2 PCIe 4.0 NVMe (`85,990 KZT`, all 4 builds).
-* `evidence/vendor-quotes/designer-gpu.jpg` — Shop.kz quote (`2026-11-24`) for MSI GeForce RTX 3060 Ventus 2X 12 GB (`289,590 KZT`, Designer).
-* `evidence/vendor-quotes/shared-psu-500w.jpg` — Shop.kz quote (`2026-11-24`) for DeepCool PF500D-HA 500W (`20,990 KZT`, Accountant/Sales/Developer).
-* `evidence/vendor-quotes/designer-psu.jpg` — Kaspi.kz quote (`2026-11-24`) for DeepCool PK600D 600W (`49,999 KZT`, Designer).
-* `evidence/vendor-quotes/shared-case.jpg` — Shop.kz quote (`2026-11-24`) for DeepCool Matrexx 30 Black (`16,200 KZT`, all 4 builds).
-* `evidence/vendor-quotes/shared-monitor-24.jpg` — Shop.kz quote (`2026-11-24`) for Acer EK241YP6bi 23.8" IPS (`49,990 KZT`, Accountant/Sales/Developer).
-* `evidence/vendor-quotes/designer-monitor.jpg` — Kaspi.kz quote (`2026-11-24`) for ASUS ProArt PA278QV 27" QHD IPS (`188,750 KZT`, Designer).
-* `evidence/vendor-quotes/shared-win11-home.jpg` — Kaspi.kz quote (`2026-11-24`) for Microsoft Windows 11 Home 64-bit (`46,800 KZT`, Accountant/Sales/Designer).
-* `evidence/vendor-quotes/shared-peripherals-mk120.jpg` — Kaspi.kz quote (`2026-11-24`) for Logitech Desktop MK120 combo (`9,990 KZT`, Accountant/Sales/Designer).
-* `evidence/vendor-quotes/dev-keyboard.jpg` — DNS quote (`2026-11-24`) for Keychron C3 Pro Wired Mechanical Keyboard (`40,630 KZT`, Developer).
-* `evidence/vendor-quotes/dev-mouse.jpg` — Shop.kz quote (`2026-11-24`) for Logitech B100 Mouse (`3,690 KZT`, Developer).
-* `evidence/vendor-quotes/prebuilt-accountant.jpg`, `prebuilt-sales.jpg`, `prebuilt-dev.jpg`, `prebuilt-designer.jpg` — Dated (`2026-11-24`) Shop.kz and DNS quotes for the four comparable pre-built PCs.
+* `evidence/vendor-quotes/shared-cpu-r5.png` — Kaspi.kz quote (`2026-11-24`) for AMD Ryzen 5 7600 BOX (`115,304 KZT`, Accountant/Sales/Designer).
+* `evidence/vendor-quotes/dev-cpu.png` — Shop.kz quote (`2026-11-24`) for AMD Ryzen 7 7700 OEM (`100,990 KZT`, Developer).
+* `evidence/vendor-quotes/dev-cooler.png` — Kaspi.kz quote (`2026-11-24`) for DeepCool AG400 cooler (`14,606 KZT`, Developer).
+* `evidence/vendor-quotes/shared-mobo-a620.png` — Kaspi.kz quote (`2026-11-24`) for MSI PRO A620M-E (`99,997 KZT`, Accountant/Sales).
+* `evidence/vendor-quotes/shared-mobo-b650.png` — Kaspi.kz quote (`2026-11-24`) for MSI PRO B650M-P (`109,999 KZT`, Developer/Designer).
+* `evidence/vendor-quotes/accountant-memory.png` — Shop.kz quote (`2026-11-24`) for AMD Radeon R5 16 GB DDR5-5200 (`122,990 KZT`, Accountant/Sales/Designer).
+* `evidence/vendor-quotes/shared-memory-32gb.png` — Shop.kz quote (`2026-11-24`) for AMD Radeon R5 32 GB (2×16 GB) DDR5-5600 (`282,990 KZT`, Developer).
+* `evidence/vendor-quotes/shared-ssd.png` — Shop.kz quote (`2026-11-24`) for Kingston NV3 1 TB M.2 PCIe 4.0 NVMe (`85,990 KZT`, all 4 builds).
+* `evidence/vendor-quotes/designer-gpu.png` — Shop.kz quote (`2026-11-24`) for MSI GeForce RTX 3060 Ventus 2X 12 GB (`289,590 KZT`, Designer).
+* `evidence/vendor-quotes/shared-psu-500w.png` — Shop.kz quote (`2026-11-24`) for DeepCool PF500D-HA 500W (`20,990 KZT`, Accountant/Sales/Developer).
+* `evidence/vendor-quotes/designer-psu.png` — Kaspi.kz quote (`2026-11-24`) for DeepCool PK600D 600W (`49,999 KZT`, Designer).
+* `evidence/vendor-quotes/shared-case.png` — Shop.kz quote (`2026-11-24`) for DeepCool Matrexx 30 Black (`16,200 KZT`, all 4 builds).
+* `evidence/vendor-quotes/shared-monitor-24.png` — Shop.kz quote (`2026-11-24`) for Acer EK241YP6bi 23.8" IPS (`49,990 KZT`, Accountant/Sales/Developer).
+* `evidence/vendor-quotes/designer-monitor.png` — Kaspi.kz quote (`2026-11-24`) for ASUS ProArt PA278QV 27" QHD IPS (`188,750 KZT`, Designer).
+* `evidence/vendor-quotes/shared-win11-home.png` — Kaspi.kz quote (`2026-11-24`) for Microsoft Windows 11 Home 64-bit (`46,800 KZT`, Accountant/Sales/Designer).
+* `evidence/vendor-quotes/shared-peripherals-mk120.png` — Kaspi.kz quote (`2026-11-24`) for Logitech Desktop MK120 combo (`9,990 KZT`, Accountant/Sales/Designer).
+* `evidence/vendor-quotes/dev-keyboard.png` — DNS quote (`2026-11-24`) for Keychron C3 Pro Wired Mechanical Keyboard (`40,630 KZT`, Developer).
+* `evidence/vendor-quotes/dev-mouse.png` — Shop.kz quote (`2026-11-24`) for Logitech B100 Mouse (`3,690 KZT`, Developer).
+* `evidence/vendor-quotes/prebuilt-accountant.png` — Shop.kz quote (`2026-11-24`) for HP OmniDesk Desktop M02-0016ci pre-built (`539,990 KZT`).
+* `evidence/vendor-quotes/prebuilt-sales.png` — DNS quote (`2026-11-24`) for MSI PRO DP180 AI pre-built (`352,050 KZT`).
+* `evidence/vendor-quotes/prebuilt-dev.png` — DNS quote (`2026-11-24`) for DEXP Mars G021 pre-built (`578,590 KZT`).
+* `evidence/vendor-quotes/prebuilt-designer.png` — DNS quote (`2026-11-24`) for ARDOR GAMING NEO M256 pre-built (`611,690 KZT`).
 
 ---
 
 ## 5. What I would do differently
 
 1. **Choosing more effective graphics adapter:** If I had Nvidia GeForce RTX 4060 available as of seeking video-adapters I would equip it over RTX 3060 since it's less noisy (effective) and is faster. Although, if it's about working on images and montaging short videos - otherwise RTX 3060 with 12GB of VRAM instead of 8GB is good enough
-2. **Use the remaining `101,811 KZT` headroom to buy more comfortable, ergonomic displays for the Accountant and Web Developer:** Instead of three budget 23.8" 1080p monitors (`Acer EK241YP6bi`, which have basic tilt-only stands and 144Hz gaming refresh rates unnecessary for office work), I would spend the `101,811 KZT` surplus to upgrade the Accountant and Developer to **height-adjustable 27" QHD IPS monitors**—giving the Accountant far more vertical and horizontal space for wide 1C/Excel ledgers and letting the Developer view an IDE and terminal side by side without eye or neck fatigue.
+2. **Use the remaining `101,811 KZT` headroom to buy more comfortable, ergonomic displays for the Accountant and Web Developer:** Instead of three budget 23.8" 1080p monitors (`Acer EK241YP6bi`, which have basic tilt-only stands and 144Hz gaming refresh rates unnecessary for office work), **Use the remaining `101,811 KZT` headroom to upgrade all three standard office monitors (`+33,937 KZT` per screen, up to `~83,927 KZT` each):** Instead of three budget 23.8" 250-nit panels (`Acer EK241YP6bi` at `49,990 KZT`, which have tilt-only stands and 144Hz gaming refresh rates unnecessary for office desks), I would reallocate the `101,811 KZT` surplus across the Accountant, Sales Manager, and Web Developer to buy **25-inch IPS office monitors with higher brightness (300+ nits), 100% sRGB color accuracy, and ergonomic height/tilt adjustment**—reducing eye strain and neck fatigue during 8-hour spreadsheet, CRM, and coding shifts.
