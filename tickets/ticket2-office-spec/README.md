@@ -106,3 +106,9 @@ Full component reasoning is in [builds.md](builds.md), and the itemized UTF-8 le
 
 1. **Choosing more effective graphics adapter:** If I had Nvidia GeForce RTX 4060 available as of seeking video-adapters I would equip it over RTX 3060 since it's less noisy (effective) and is faster. Although, if it's about working on images and montaging short videos - otherwise RTX 3060 with 12GB of VRAM instead of 8GB is good enough
 2. **Use the remaining `101,811 KZT` headroom to buy more comfortable, ergonomic displays for the Accountant and Web Developer:** Instead of three budget 23.8" 1080p monitors (`Acer EK241YP6bi`, which have basic tilt-only stands and 144Hz gaming refresh rates unnecessary for office work), **Use the remaining `101,811 KZT` headroom to upgrade all three standard office monitors (`+33,937 KZT` per screen, up to `~83,927 KZT` each):** Instead of three budget 23.8" 250-nit panels (`Acer EK241YP6bi` at `49,990 KZT`, which have tilt-only stands and 144Hz gaming refresh rates unnecessary for office desks), I would reallocate the `101,811 KZT` surplus across the Accountant, Sales Manager, and Web Developer to buy **25-inch IPS office monitors with higher brightness (300+ nits), 100% sRGB color accuracy, and ergonomic height/tilt adjustment**—reducing eye strain and neck fatigue during 8-hour spreadsheet, CRM, and coding shifts.
+
+
+## AI Assistance Declaration
+
+* **Tool Used:** Google Gemini (4 Hydrogen)
+* **Purpose:** Used to structure the five-section technical report (`README.md`) and workload analysis (`builds.md`), verify hardware compatibility across sockets/DDR5/M.2/PSU ratings, and audit KZT budget totals in `budget.csv`. All vendor prices, product URLs, and dated screenshots were independently sourced and verified from Kazakhstan retailers (`Kaspi.kz`, `Shop.kz`, and `DNS`).
