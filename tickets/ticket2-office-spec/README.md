@@ -56,4 +56,5 @@ Every build meets all mandatory baseline specifications and sourcing rules:
 (Links to evidence/ with one line each on what that file proves.)
 
 ## 5. What I would do differently
-If I had Nvidia GeForce RTX 4060 available as of seeking video-adapters I would equip it over RTX 3060 since it's less noisy (effective) and is faster. Although, if it's about working on images and montaging short videos - otherwise RTX 3060 with 12GB of VRAM instead of 8GB is good enough
+**Choosing more effective graphics adapter:** If I had Nvidia GeForce RTX 4060 available as of seeking video-adapters I would equip it over RTX 3060 since it's less noisy (effective) and is faster. Although, if it's about working on images and montaging short videos - otherwise RTX 3060 with 12GB of VRAM instead of 8GB is good enough
+**Reallocate ~100,000 KZT of remaining headroom (`101,811 KZT`) toward a 32 GB RAM kit for the Sales Manager:** With `101,811 KZT` left under the 3,000,000 KZT ceiling, adding a modest `~60,000 KZT` from contingency would have upgraded the Sales Manager from 16 GB to 32 GB DDR5 on Day 1, eliminating the single biggest multitasking bottleneck in the office.
