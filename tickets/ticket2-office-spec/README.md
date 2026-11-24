@@ -43,7 +43,6 @@ Daniyar is wrong to buy four identical computers. Splitting 3,000,000 KZT evenly
 | Are all four hires starting on Day 1, or is one role staggered? | All four machines must be purchased and ready before the office opens. |
 
 ## 3. What I did
-## 3. What I did
 
 ### Hard Requirements & Sourcing Compliance
 Every build meets all mandatory baseline specifications and sourcing rules:
@@ -57,4 +56,4 @@ Every build meets all mandatory baseline specifications and sourcing rules:
 (Links to evidence/ with one line each on what that file proves.)
 
 ## 5. What I would do differently
-(At least one specific thing.)
+If I had Nvidia GeForce RTX 4060 available as of seeking video-adapters I would equip it over RTX 3060 since it's less noisy (effective) and is faster. Although, if it's about working on images and montaging short videos - otherwise RTX 3060 with 12GB of VRAM instead of 8GB is good enough
