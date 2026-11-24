@@ -1,0 +1,50 @@
+role,component,model,price_kzt,source,date
+accountant,CPU,AMD Ryzen 5 7600 BOX,115304,https://kaspi.kz/shop/p/amd-ryzen-5-7600-box-115938905/?c=750000000,2026-11-24
+accountant,Motherboard,MSI PRO A620M-E,99997,https://kaspi.kz/shop/p/msi-pro-a620m-e-110975178/?c=750000000,2026-11-24
+accountant,Memory,AMD Radeon R5 Entertainment Series 16 GB (1x16 GB) DDR5-5200,122990,https://shop.kz/offer/ddr-5-dimm-16-gb-5200-mhz-amd-radeon-r5-entertainment-series-box-r5516g5200u1s-u/,2026-11-24
+accountant,Storage,Kingston NV3 1 TB M.2 PCIe 4.0 NVMe,85990,https://shop.kz/offer/ssd-nakopitel-1-tb-kingston-nv3-m-2-pcie-4-0/,2026-11-24
+accountant,PSU,DeepCool PF500D-HA 500W,20990,https://shop.kz/offer/blok-pitaniya-atx-500-w-deepcool-pf500d-ha/,2026-11-24
+accountant,Case,DeepCool Matrexx 30 Black,16200,https://shop.kz/offer/korpus-deepcool-matrexx-30-black/,2026-11-24
+accountant,Monitor,"Acer EK241YP6bi 23.8"" IPS 144Hz",49990,https://shop.kz/offer/monitor-23-8-acer-ek241yp6bi-black/,2026-11-24
+accountant,OS,Microsoft Windows 11 Home 64-bit,46800,https://kaspi.kz/shop/p/microsoft-windows-11-home-64-bit-110530490/?c=750000000,2026-11-24
+accountant,Peripherals,Logitech Desktop MK120 Combo,9990,https://kaspi.kz/shop/p/logitech-desktop-mk120-chernyi-9000235/?c=750000000,2026-11-24
+accountant,TOTAL,Accountant Subtotal,568251,,2026-11-24
+sales,CPU,AMD Ryzen 5 7600 BOX,115304,https://kaspi.kz/shop/p/amd-ryzen-5-7600-box-115938905/?c=750000000,2026-11-24
+sales,Motherboard,MSI PRO A620M-E,99997,https://kaspi.kz/shop/p/msi-pro-a620m-e-110975178/?c=750000000,2026-11-24
+sales,Memory,AMD Radeon R5 Entertainment Series 16 GB (1x16 GB) DDR5-5200,122990,https://shop.kz/offer/ddr-5-dimm-16-gb-5200-mhz-amd-radeon-r5-entertainment-series-box-r5516g5200u1s-u/,2026-11-24
+sales,Storage,Kingston NV3 1 TB M.2 PCIe 4.0 NVMe,85990,https://shop.kz/offer/ssd-nakopitel-1-tb-kingston-nv3-m-2-pcie-4-0/,2026-11-24
+sales,PSU,DeepCool PF500D-HA 500W,20990,https://shop.kz/offer/blok-pitaniya-atx-500-w-deepcool-pf500d-ha/,2026-11-24
+sales,Case,DeepCool Matrexx 30 Black,16200,https://shop.kz/offer/korpus-deepcool-matrexx-30-black/,2026-11-24
+sales,Monitor,"Acer EK241YP6bi 23.8"" IPS 144Hz",49990,https://shop.kz/offer/monitor-23-8-acer-ek241yp6bi-black/,2026-11-24
+sales,OS,Microsoft Windows 11 Home 64-bit,46800,https://kaspi.kz/shop/p/microsoft-windows-11-home-64-bit-110530490/?c=750000000,2026-11-24
+sales,Peripherals,Logitech Desktop MK120 Combo,9990,https://kaspi.kz/shop/p/logitech-desktop-mk120-chernyi-9000235/?c=750000000,2026-11-24
+sales,TOTAL,Sales Subtotal,568251,,2026-11-24
+developer,CPU,AMD Ryzen 7 7700 OEM,100990,https://shop.kz/offer/protsessor-amd-ryzen-7-7700-am5-oem/,2026-11-24
+developer,Cooler,DeepCool AG400,14606,https://kaspi.kz/shop/p/kuler-deepcool-ag400-122301415/?c=750000000,2026-11-24
+developer,Motherboard,MSI PRO B650M-P,109999,https://kaspi.kz/shop/p/msi-pro-b650m-p-113360893/?c=750000000,2026-11-24
+developer,Memory,AMD Radeon R5 Gamer 32 GB (2x16 GB) DDR5-5600,282990,https://shop.kz/offer/ddr-5-dimm-32-gb-5600-mhz-amd-radeon-r5-gamer-2x-16-gb-kit-box-r5s532g5600u1k/,2026-11-24
+developer,Storage,Kingston NV3 1 TB M.2 PCIe 4.0 NVMe,85990,https://shop.kz/offer/ssd-nakopitel-1-tb-kingston-nv3-m-2-pcie-4-0/,2026-11-24
+developer,PSU,DeepCool PF500D-HA 500W,20990,https://shop.kz/offer/blok-pitaniya-atx-500-w-deepcool-pf500d-ha/,2026-11-24
+developer,Case,DeepCool Matrexx 30 Black,16200,https://shop.kz/offer/korpus-deepcool-matrexx-30-black/,2026-11-24
+developer,Monitor,"Acer EK241YP6bi 23.8"" IPS 144Hz",49990,https://shop.kz/offer/monitor-23-8-acer-ek241yp6bi-black/,2026-11-24
+developer,OS,Ubuntu 24.04 LTS (Open-Source Commercial License),0,https://ubuntu.com/download/desktop,2026-11-24
+developer,Keyboard,Keychron C3 Pro Wired Mechanical,40630,https://www.dns-shop.kz/product/b0858d99a0d85f78/klaviatura-provodnaa-keychron-c3-pro-cvet-cernyj/,2026-11-24
+developer,Mouse,Logitech B100 Black USB,3690,https://shop.kz/offer/mysh-logitech-b100-black-usb/,2026-11-24
+developer,TOTAL,Developer Subtotal,726075,,2026-11-24
+designer,CPU,AMD Ryzen 5 7600 BOX,115304,https://kaspi.kz/shop/p/amd-ryzen-5-7600-box-115938905/?c=750000000,2026-11-24
+designer,Motherboard,MSI PRO B650M-P,109999,https://kaspi.kz/shop/p/msi-pro-b650m-p-113360893/?c=750000000,2026-11-24
+designer,Memory,AMD Radeon R5 Entertainment Series 16 GB (1x16 GB) DDR5-5200,122990,https://shop.kz/offer/ddr-5-dimm-16-gb-5200-mhz-amd-radeon-r5-entertainment-series-box-r5516g5200u1s-u/,2026-11-24
+designer,Storage,Kingston NV3 1 TB M.2 PCIe 4.0 NVMe,85990,https://shop.kz/offer/ssd-nakopitel-1-tb-kingston-nv3-m-2-pcie-4-0/,2026-11-24
+designer,GPU,MSI GeForce RTX 3060 Ventus 2X 12 GB,289590,https://shop.kz/offer/videokarta-msi-rtx-3060-ventus-2x-12-gb-geforce-rtx-3060/,2026-11-24
+designer,PSU,DeepCool PK600D 600W 80+ Bronze,49999,https://kaspi.kz/shop/p/deepcool-pk600d-f20-r-pk600d-fa0b-wgeu-600-vt-142268773/?c=750000000,2026-11-24
+designer,Case,DeepCool Matrexx 30 Black,16200,https://shop.kz/offer/korpus-deepcool-matrexx-30-black/,2026-11-24
+designer,Monitor,"ASUS ProArt PA278QV 27"" QHD IPS",188750,https://kaspi.kz/shop/p/27-asus-proart-pa278qv-chernyi-100687741/?c=750000000,2026-11-24
+designer,OS,Microsoft Windows 11 Home 64-bit,46800,https://kaspi.kz/shop/p/microsoft-windows-11-home-64-bit-110530490/?c=750000000,2026-11-24
+designer,Peripherals,Logitech Desktop MK120 Combo,9990,https://kaspi.kz/shop/p/logitech-desktop-mk120-chernyi-9000235/?c=750000000,2026-11-24
+designer,TOTAL,Designer Subtotal,1035612,,2026-11-24
+ALL,GRAND_TOTAL,"Total Custom Office Budget (<= 3,000,000 KZT)",2898189,,2026-11-24
+prebuilt_accountant,Pre-Built PC (Tower Only),HP OmniDesk Desktop M02-0016ci (i5 / 16GB / 512GB / No OS),539990,https://shop.kz/offer/kompyuter-hp-omnidesk-desktop-m02-0016ci-e1xt1ea/,2026-11-24
+prebuilt_sales,Pre-Built PC (Tower Only),MSI PRO DP180 AI-8HG-9S6-B0A781-1450 (Core Ultra 5 225 / 16GB DDR5 / 512GB / No OS),352050,https://www.dns-shop.kz/product/bf8501aa3ec9d9cb/pk-msi-pro-dp180-ai-8hg-9s6-b0a781-1450/,2026-11-24
+prebuilt_developer,Pre-Built PC (Tower Only),DEXP Mars G021 (Ryzen 7 8700G / 32GB DDR5 / 1TB / B650 / 600W / No OS),578590,https://www.dns-shop.kz/product/15e071045af1d582/pk-dexp-mars-g021/,2026-11-24
+prebuilt_designer,Pre-Built PC (Tower Only),ARDOR GAMING NEO M256 (Ryzen 5 7500F / 16GB DDR5 / 1TB / RTX 5060 8GB / 500W / No OS),611690,https://www.dns-shop.kz/product/06834907d6fbd582/pk-ardor-gaming-neo-m256/,2026-11-24
+prebuilt_all,PREBUILT_TOWERS_TOTAL,"Pre-Built Towers Subtotal (Excludes Monitors, 3x Win11, Dev Peripherals)",2082320,,2026-11-24
