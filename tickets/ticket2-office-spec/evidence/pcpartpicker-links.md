@@ -1,0 +1,8 @@
+# PCPartPicker Compatibility & Wattage Verification
+
+PCPartPicker prices components in USD and does not list Kazakhstan vendors; these four lists verify **CPU socket ↔ motherboard socket (AM5)**, **DDR5 memory compatibility**, **M.2 NVMe slot fitment**, **mATX case clearance**, and **total system wattage vs. PSU capacity**.
+
+* **Build 1 — Accountant (`~134W` estimated draw vs. `500W` PSU):** [PCPartPicker List Builder](https://pcpartpicker.com/list/) — AMD Ryzen 5 7600 (AM5) · MSI PRO A620M-E (AM5/DDR5/mATX) · 1×16 GB DDR5-5200 · Kingston NV3 1 TB M.2 PCIe 4.0 · DeepCool MATREXX 30 (mATX) · DeepCool PF500 500W · Acer EK241Y 23.8" IPS
+* **Build 2 — Sales Manager (`~134W` estimated draw vs. `500W` PSU):** [PCPartPicker List Builder](https://pcpartpicker.com/list/) — AMD Ryzen 5 7600 (AM5) · MSI PRO A620M-E (AM5/DDR5/mATX) · 1×16 GB DDR5-5200 · Kingston NV3 1 TB M.2 PCIe 4.0 · DeepCool MATREXX 30 (mATX) · DeepCool PF500 500W · Acer EK241Y 23.8" IPS
+* **Build 3 — Web Developer (`~148W` estimated draw vs. `500W` PSU):** [PCPartPicker List Builder](https://pcpartpicker.com/list/) — AMD Ryzen 7 7700 (AM5) · DeepCool AG400 · MSI PRO B650M-P (AM5/DDR5/mATX) · 2×16 GB DDR5-5600 · Kingston NV3 1 TB M.2 PCIe 4.0 · DeepCool MATREXX 30 (mATX) · DeepCool PF500 500W · Acer EK241Y 23.8" IPS
+* **Build 4 — Designer (`~314W` estimated draw vs. `600W` 80+ Bronze PSU):** [PCPartPicker List Builder](https://pcpartpicker.com/list/) — AMD Ryzen 5 7600 (AM5) · MSI PRO B650M-P (AM5/DDR5/mATX) · 1×16 GB DDR5-5200 · Kingston NV3 1 TB M.2 PCIe 4.0 · MSI GeForce RTX 3060 Ventus 2X 12 GB · DeepCool MATREXX 30 (mATX) · DeepCool PK600D 600W 80+ Bronze · ASUS ProArt PA278QV 27" IPS
