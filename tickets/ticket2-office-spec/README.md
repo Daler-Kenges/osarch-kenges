@@ -43,8 +43,15 @@ Daniyar is wrong to buy four identical computers. Splitting 3,000,000 KZT evenly
 | Are all four hires starting on Day 1, or is one role staggered? | All four machines must be purchased and ready before the office opens. |
 
 ## 3. What I did
-(How you went from roles to loads to parts; the budget; links to builds.md and budget.csv.
-Then the three answers below.)
+## 3. What I did
+
+### Hard Requirements & Sourcing Compliance
+Every build meets all mandatory baseline specifications and sourcing rules:
+* **Memory:** Minimum 16 GB DDR5 on every machine (16 GB for the accountant; 32 GB for sales, web development, and design).
+* **Storage:** Every build includes a 1 TB M.2 NVMe SSD.
+* **Operating System:** All four machines run legally licensed operating systems—priced **Windows 11 OEM** licenses for the Accountant, Sales Manager, and Designer (required for 1C:Enterprise, NCALayer, MS Office, and Adobe Creative Cloud), and **Ubuntu 24.04 LTS** (0 KZT) for the Web Developer, which is commercially licensed under open-source/Canonical terms and runs Docker containers natively without virtualization overhead.
+* **Monitors:** One dedicated IPS monitor is included and priced per workstation (three 24" Full HD IPS displays for general office/dev work; one 27" QHD 100% sRGB IPS display for the designer).
+* **Local Kazakhstan Pricing & Dates:** All component and pre-built prices are recorded in **KZT** from vendors delivering locally in Kazakhstan (such as Kaspi.kz, Shop.kz, DNS, White Wind, and Technodom) and stamped with the exact lookup date (`2026-11-24`) in [budget.csv](budget.csv) and verified via dated screenshots in [evidence/vendor-quotes/](evidence/vendor-quotes/).
 
 ## 4. Evidence
 (Links to evidence/ with one line each on what that file proves.)
